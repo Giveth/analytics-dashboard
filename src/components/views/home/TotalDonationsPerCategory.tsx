@@ -16,7 +16,7 @@ const nowMinusOneMonth = new Date(
 const TotalDonationsPerCategory = () => {
 	const [fromDate, setFromDate] = useState(nowMinusOneMonth);
 	const [toDate, setToDate] = useState(now);
-	const [totalDonationsPerCategory, loading] = useTotalDonationsPerCategory(
+	const { totalDonationsPerCategory, loading } = useTotalDonationsPerCategory(
 		fromDate,
 		toDate,
 	);

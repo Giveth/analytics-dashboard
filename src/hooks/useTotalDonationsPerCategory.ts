@@ -26,7 +26,7 @@ const useTotalDonationsPerCategory = (fromDate: Date, toDate: Date) => {
 			.finally(() => setLoading(false));
 	}, [fromDate, toDate]);
 
-	return [totalDonationsPerCategory, loading];
+	return { totalDonationsPerCategory, loading };
 };
 
 export default useTotalDonationsPerCategory;
