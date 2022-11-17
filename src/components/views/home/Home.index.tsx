@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import ProjectsCount from './ProjectsCount';
 import DonorsCount from './DonorsCount';
 import TotalDonationsUSD from './TotalDonationsUSD';
-import TotalDonationsPerCategory from './TotalDonationsPerCategory';
 
 const HomeIndex = () => {
 	return (
@@ -14,8 +13,6 @@ const HomeIndex = () => {
 			<DonorsCount />
 			<hr />
 			<TotalDonationsUSD />
-			<hr />
-			<TotalDonationsPerCategory />
 		</ContainerStyled>
 	);
 };

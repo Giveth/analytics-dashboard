@@ -21,6 +21,13 @@
     "prettier/prettier": [
       "error",
       {
+        "singleQuote": true,
+        "useTabs": true,
+        "tabWidth": 4,
+        "semi": true,
+        "jsxSingleQuote": true,
+        "trailingComma": "all",
+        "arrowParens": "avoid",
         "endOfLine": "auto"
       }
     ],

@@ -4,19 +4,34 @@ import { H2, H3 } from '@giveth/ui-design-system';
 import { Col, Row } from '../../styled-components/grid';
 import { StyledDatePicker } from '../../styled-components/datePicker';
 import Spinner from '../../Spinner';
-import useTotalDonationsUSD from '../../../hooks/useTotalDonationsUSD';
-
-const now = new Date();
-const nowMinusOneMonth = new Date(
-	now.getFullYear(),
-	now.getMonth() - 1,
-	now.getDate(),
-);
+import useTotalDonations from '../../../hooks/useTotalDonations';
+import useFetchCategoryDonations from '../../../hooks/useFetchCategoryDonations';
+import CategoryDonations from './CategoryDonations';
+import { nowMinusOneMonth } from '../../../lib/helpers';
 
 const TotalDonationsUSD = () => {
-	const [fromDate, setFromDate] = useState(nowMinusOneMonth);
-	const [toDate, setToDate] = useState(now);
-	const [totalDonationsUSD, loading] = useTotalDonationsUSD(fromDate, toDate);
+	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
+	const [toDate, setToDate] = useState(new Date());
+	const { totalDonations = '0', loading: loadingTotal } = useTotalDonations(
+		fromDate,
+		toDate,
+	);
+	const { categoryDonations, loading: loadingCategories } =
+		useFetchCategoryDonations(fromDate, toDate);
+
+	const totalCategoryDonations = categoryDonations?.reduce(
+		(i, j) => i + j.totalUsd,
+		0,
+	);
+
+	const norCategoryDonations = categoryDonations?.map(i => {
+		return {
+			...i,
+			totalUsd:
+				(i.totalUsd * Number(totalDonations)) /
+				(totalCategoryDonations || 1),
+		};
+	});
 
 	return (
 		<RowStyled>
@@ -48,8 +63,13 @@ const TotalDonationsUSD = () => {
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
-				{loading ? <Spinner /> : <H2>{totalDonationsUSD}</H2>}
+				{loadingTotal ? <Spinner /> : <H2>{totalDonations}</H2>}
 			</Col>
+			{loadingCategories ? (
+				<Spinner />
+			) : (
+				<CategoryDonations categoryDonations={norCategoryDonations} />
+			)}
 		</RowStyled>
 	);
 };

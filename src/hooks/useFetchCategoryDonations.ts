@@ -7,8 +7,8 @@ import {
 } from '../types/gql';
 import { formatDateToISO } from '../lib/helpers';
 
-const useTotalDonationsPerCategory = (fromDate: Date, toDate: Date) => {
-	const [totalDonationsPerCategory, setTotalDonationsPerCategory] =
+const useFetchCategoryDonations = (fromDate: Date, toDate: Date) => {
+	const [categoryDonations, setCategoryDonations] =
 		useState<ITotalDonationsPerCategory[]>();
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -21,12 +21,12 @@ const useTotalDonationsPerCategory = (fromDate: Date, toDate: Date) => {
 		backendGQLRequest(fetchTotalDonationsPerCategory, variables)
 			.then((res: IFetchTotalDonationsPerCategory) => {
 				const total = res.data.totalDonationsPerCategory;
-				setTotalDonationsPerCategory(total);
+				setCategoryDonations(total);
 			})
 			.finally(() => setLoading(false));
 	}, [fromDate, toDate]);
 
-	return { totalDonationsPerCategory, loading };
+	return { categoryDonations, loading };
 };
 
-export default useTotalDonationsPerCategory;
+export default useFetchCategoryDonations;

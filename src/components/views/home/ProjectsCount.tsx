@@ -5,17 +5,11 @@ import { Col, Row } from '../../styled-components/grid';
 import { StyledDatePicker } from '../../styled-components/datePicker';
 import useFetchProjectsCount from '../../../hooks/useFetchProjectsCount';
 import Spinner from '../../Spinner';
-
-const now = new Date();
-const nowMinusOneMonth = new Date(
-	now.getFullYear(),
-	now.getMonth() - 1,
-	now.getDate(),
-);
+import { nowMinusOneMonth } from '../../../lib/helpers';
 
 const ProjectsCount = () => {
-	const [fromDate, setFromDate] = useState(nowMinusOneMonth);
-	const [toDate, setToDate] = useState(now);
+	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
+	const [toDate, setToDate] = useState(new Date());
 	const [projectsCount, loading] = useFetchProjectsCount(fromDate, toDate);
 
 	return (

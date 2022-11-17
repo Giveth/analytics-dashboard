@@ -4,8 +4,8 @@ import { IFetchTotalDonationsUSD } from '../types/gql';
 import { formatDateToISO } from '../lib/helpers';
 import { fetchTotalDonationsUSD } from '../gql/gqlDonations';
 
-const useTotalDonationsUSD = (fromDate: Date, toDate: Date) => {
-	const [totalDonationsUSD, setTotalDonationsUSD] = useState<string>();
+const useTotalDonations = (fromDate: Date, toDate: Date) => {
+	const [totalDonations, setTotalDonations] = useState<string>();
 	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
@@ -17,12 +17,12 @@ const useTotalDonationsUSD = (fromDate: Date, toDate: Date) => {
 		backendGQLRequest(fetchTotalDonationsUSD, variables)
 			.then((res: IFetchTotalDonationsUSD) => {
 				const total = res.data.donationsTotalUsdPerDate.toFixed(0);
-				setTotalDonationsUSD(total);
+				setTotalDonations(total);
 			})
 			.finally(() => setLoading(false));
 	}, [fromDate, toDate]);
 
-	return [totalDonationsUSD, loading];
+	return { totalDonations, loading };
 };
 
-export default useTotalDonationsUSD;
+export default useTotalDonations;
