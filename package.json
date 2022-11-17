@@ -1,7 +1,8 @@
 {
   "name": "analytics-dashboard",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "author": "Ramin Ramazanpour",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
