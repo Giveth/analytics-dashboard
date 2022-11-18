@@ -12,3 +12,7 @@ export const nowMinusOneMonth = () => {
 	const now = new Date();
 	return new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
 };
+
+export const thousandsSeparator = (x?: string | number) => {
+	return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};

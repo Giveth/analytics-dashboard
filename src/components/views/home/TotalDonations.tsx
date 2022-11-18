@@ -7,9 +7,9 @@ import Spinner from '../../Spinner';
 import useTotalDonations from '../../../hooks/useTotalDonations';
 import useFetchCategoryDonations from '../../../hooks/useFetchCategoryDonations';
 import CategoryDonations from './CategoryDonations';
-import { nowMinusOneMonth } from '../../../lib/helpers';
+import { nowMinusOneMonth, thousandsSeparator } from '../../../lib/helpers';
 
-const TotalDonationsUSD = () => {
+const TotalDonations = () => {
 	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
 	const [toDate, setToDate] = useState(new Date());
 	const { totalDonations = '0', loading: loadingTotal } = useTotalDonations(
@@ -63,7 +63,11 @@ const TotalDonationsUSD = () => {
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
-				{loadingTotal ? <Spinner /> : <H2>{totalDonations}</H2>}
+				{loadingTotal ? (
+					<Spinner />
+				) : (
+					<H2>{thousandsSeparator(totalDonations)}</H2>
+				)}
 			</Col>
 			{loadingCategories ? (
 				<Spinner />
@@ -80,4 +84,4 @@ const RowStyled = styled(Row)`
 	margin-bottom: 40px;
 `;
 
-export default TotalDonationsUSD;
+export default TotalDonations;

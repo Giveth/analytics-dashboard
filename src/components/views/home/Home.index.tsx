@@ -2,7 +2,7 @@ import { Container, H1 } from '@giveth/ui-design-system';
 import styled from 'styled-components';
 import ProjectsCount from './ProjectsCount';
 import DonorsCount from './DonorsCount';
-import TotalDonationsUSD from './TotalDonationsUSD';
+import TotalDonations from './TotalDonations';
 
 const HomeIndex = () => {
 	return (
@@ -12,7 +12,7 @@ const HomeIndex = () => {
 			<hr />
 			<DonorsCount />
 			<hr />
-			<TotalDonationsUSD />
+			<TotalDonations />
 		</ContainerStyled>
 	);
 };

@@ -5,12 +5,12 @@ import { Col, Row } from '../../styled-components/grid';
 import { StyledDatePicker } from '../../styled-components/datePicker';
 import useFetchProjectsCount from '../../../hooks/useFetchProjectsCount';
 import Spinner from '../../Spinner';
-import { nowMinusOneMonth } from '../../../lib/helpers';
+import { nowMinusOneMonth, thousandsSeparator } from '../../../lib/helpers';
 
 const ProjectsCount = () => {
 	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
 	const [toDate, setToDate] = useState(new Date());
-	const [projectsCount, loading] = useFetchProjectsCount(fromDate, toDate);
+	const { projectsCount, loading } = useFetchProjectsCount(fromDate, toDate);
 
 	return (
 		<RowStyled>
@@ -41,7 +41,13 @@ const ProjectsCount = () => {
 				</div>
 			</Col>
 			<Col md={1} />
-			<Col md={2}>{loading ? <Spinner /> : <H2>{projectsCount}</H2>}</Col>
+			<Col md={2}>
+				{loading ? (
+					<Spinner />
+				) : (
+					<H2>{thousandsSeparator(projectsCount)}</H2>
+				)}
+			</Col>
 		</RowStyled>
 	);
 };

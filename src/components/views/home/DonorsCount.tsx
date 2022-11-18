@@ -5,12 +5,12 @@ import { Col, Row } from '../../styled-components/grid';
 import { StyledDatePicker } from '../../styled-components/datePicker';
 import Spinner from '../../Spinner';
 import useFetchDonorsCount from '../../../hooks/useFetchDonorsCount';
-import { nowMinusOneMonth } from '../../../lib/helpers';
+import { nowMinusOneMonth, thousandsSeparator } from '../../../lib/helpers';
 
 const DonorsCount = () => {
 	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
 	const [toDate, setToDate] = useState(new Date());
-	const [donorsCount, loading] = useFetchDonorsCount(fromDate, toDate);
+	const { donorsCount, loading } = useFetchDonorsCount(fromDate, toDate);
 
 	return (
 		<RowStyled>
@@ -41,7 +41,13 @@ const DonorsCount = () => {
 				</div>
 			</Col>
 			<Col md={1} />
-			<Col md={2}>{loading ? <Spinner /> : <H2>{donorsCount}</H2>}</Col>
+			<Col md={2}>
+				{loading ? (
+					<Spinner />
+				) : (
+					<H2>{thousandsSeparator(donorsCount)}</H2>
+				)}
+			</Col>
 		</RowStyled>
 	);
 };

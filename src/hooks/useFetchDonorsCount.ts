@@ -21,7 +21,7 @@ const useFetchDonorsCount = (fromDate: Date, toDate: Date) => {
 			.finally(() => setLoading(false));
 	}, [fromDate, toDate]);
 
-	return [donorsCount, loading];
+	return { donorsCount, loading };
 };
 
 export default useFetchDonorsCount;

@@ -21,7 +21,7 @@ const useFetchProjectsCount = (fromDate: Date, toDate: Date) => {
 			.finally(() => setLoading(false));
 	}, [fromDate, toDate]);
 
-	return [projectsCount, loading];
+	return { projectsCount, loading };
 };
 
 export default useFetchProjectsCount;
