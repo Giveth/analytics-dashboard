@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --ext .ts --ext .tsx --fix"
   },
   "dependencies": {
-    "@giveth/ui-design-system": "^1.8.29",
+    "@giveth/ui-design-system": "^1.9.1",
     "graphql": "^16.6.0",
     "highcharts": "^10.3.1",
     "highcharts-react-official": "^3.1.0",

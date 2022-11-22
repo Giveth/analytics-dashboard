@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { H2, H3 } from '@giveth/ui-design-system';
+import {
+	H2,
+	H4,
+	IconHelpFilled16,
+	neutralColors,
+	Subline,
+} from '@giveth/ui-design-system';
 import { Col, Row } from '../../styled-components/grid';
 import { StyledDatePicker } from '../../styled-components/datePicker';
 import Spinner from '../../Spinner';
@@ -8,6 +14,8 @@ import useTotalDonations from '../../../hooks/useTotalDonations';
 import useFetchCategoryDonations from '../../../hooks/useFetchCategoryDonations';
 import CategoryDonations from './CategoryDonations';
 import { nowMinusOneMonth, thousandsSeparator } from '../../../lib/helpers';
+import { IconWithTooltip } from '../../IconWithTooltip';
+import { FlexCenter } from '../../styled-components/flex';
 
 const TotalDonations = () => {
 	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
@@ -36,7 +44,18 @@ const TotalDonations = () => {
 	return (
 		<RowStyled>
 			<Col md={4}>
-				<H3>Total Donations USD</H3>
+				<FlexCenter gap='10px'>
+					<H4>Total Donations ($)</H4>
+					<IconWithTooltip
+						icon={<IconHelpFilled16 />}
+						direction={'top'}
+					>
+						<TooltipBody>
+							Total sum of all donations value in USD during the
+							selected timeframe.
+						</TooltipBody>
+					</IconWithTooltip>
+				</FlexCenter>
 			</Col>
 			<Col md={4}>
 				<div>
@@ -77,6 +96,11 @@ const TotalDonations = () => {
 		</RowStyled>
 	);
 };
+
+const TooltipBody = styled(Subline)`
+	color: ${neutralColors.gray[100]};
+	width: 270px;
+`;
 
 const RowStyled = styled(Row)`
 	margin-top: 40px;

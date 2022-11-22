@@ -2,6 +2,14 @@ import { FC } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import styled from 'styled-components';
+import {
+	H5,
+	IconHelpFilled16,
+	neutralColors,
+	Subline,
+} from '@giveth/ui-design-system';
+import { IconWithTooltip } from '../../IconWithTooltip';
+import { FlexCenter } from '../../styled-components/flex';
 
 interface IProps {
 	categoryDonations?: {
@@ -21,7 +29,7 @@ const CategoryDonations: FC<IProps> = ({ categoryDonations }) => {
 			type: 'pie',
 		},
 		title: {
-			text: 'Total Donations Per Category (Normalized)',
+			text: null,
 		},
 		tooltip: {
 			enabled: true,
@@ -47,13 +55,31 @@ const CategoryDonations: FC<IProps> = ({ categoryDonations }) => {
 
 	return (
 		<Container>
+			<FlexCenter gap='10px'>
+				<H5>Total Donations Per Category (Normalized)</H5>
+				<IconWithTooltip icon={<IconHelpFilled16 />} direction={'top'}>
+					<TooltipBody>
+						Current distribution of all donations by Main project
+						category during the selected timeframe.
+						<br />
+						Projects may have more than one category so donations
+						are normalized to the total donations value.
+					</TooltipBody>
+				</IconWithTooltip>
+			</FlexCenter>
 			<HighchartsReact highcharts={Highcharts} options={options} />
 		</Container>
 	);
 };
 
+const TooltipBody = styled(Subline)`
+	color: ${neutralColors.gray[100]};
+	width: 270px;
+`;
+
 const Container = styled.div`
 	margin-top: 50px;
+	text-align: center;
 `;
 
 export default CategoryDonations;

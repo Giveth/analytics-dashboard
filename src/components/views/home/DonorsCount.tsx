@@ -1,11 +1,19 @@
 import { useState } from 'react';
-import { H2, H3 } from '@giveth/ui-design-system';
+import {
+	H2,
+	H4,
+	IconHelpFilled16,
+	neutralColors,
+	Subline,
+} from '@giveth/ui-design-system';
 import styled from 'styled-components';
 import { Col, Row } from '../../styled-components/grid';
 import { StyledDatePicker } from '../../styled-components/datePicker';
 import Spinner from '../../Spinner';
 import useFetchDonorsCount from '../../../hooks/useFetchDonorsCount';
 import { nowMinusOneMonth, thousandsSeparator } from '../../../lib/helpers';
+import { IconWithTooltip } from '../../IconWithTooltip';
+import { FlexCenter } from '../../styled-components/flex';
 
 const DonorsCount = () => {
 	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
@@ -15,7 +23,18 @@ const DonorsCount = () => {
 	return (
 		<RowStyled>
 			<Col md={4}>
-				<H3>Donors Count</H3>
+				<FlexCenter gap='10px'>
+					<H4>Donors Count </H4>
+					<IconWithTooltip
+						icon={<IconHelpFilled16 />}
+						direction={'top'}
+					>
+						<TooltipBody>
+							Total number of unique donors during the selected
+							timeframe, including anonymous donations.
+						</TooltipBody>
+					</IconWithTooltip>
+				</FlexCenter>
 			</Col>
 			<Col md={4}>
 				<div>
@@ -51,6 +70,11 @@ const DonorsCount = () => {
 		</RowStyled>
 	);
 };
+
+const TooltipBody = styled(Subline)`
+	color: ${neutralColors.gray[100]};
+	width: 270px;
+`;
 
 const RowStyled = styled(Row)`
 	margin-top: 40px;

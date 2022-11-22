@@ -1,4 +1,10 @@
-import { H2, H3 } from '@giveth/ui-design-system';
+import {
+	H2,
+	H4,
+	IconHelpFilled16,
+	neutralColors,
+	Subline,
+} from '@giveth/ui-design-system';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { Col, Row } from '../../styled-components/grid';
@@ -6,6 +12,8 @@ import { StyledDatePicker } from '../../styled-components/datePicker';
 import useFetchProjectsCount from '../../../hooks/useFetchProjectsCount';
 import Spinner from '../../Spinner';
 import { nowMinusOneMonth, thousandsSeparator } from '../../../lib/helpers';
+import { IconWithTooltip } from '../../IconWithTooltip';
+import { FlexCenter } from '../../styled-components/flex';
 
 const ProjectsCount = () => {
 	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
@@ -15,7 +23,18 @@ const ProjectsCount = () => {
 	return (
 		<RowStyled>
 			<Col md={4}>
-				<H3>Projects Count</H3>
+				<FlexCenter gap='10px'>
+					<H4>Projects Count </H4>
+					<IconWithTooltip
+						icon={<IconHelpFilled16 />}
+						direction={'top'}
+					>
+						<TooltipBody>
+							Total number of new projects onboarded during the
+							selected timeframe.
+						</TooltipBody>
+					</IconWithTooltip>
+				</FlexCenter>
 			</Col>
 			<Col md={4}>
 				<div>
@@ -51,6 +70,11 @@ const ProjectsCount = () => {
 		</RowStyled>
 	);
 };
+
+const TooltipBody = styled(Subline)`
+	color: ${neutralColors.gray[100]};
+	width: 260px;
+`;
 
 const RowStyled = styled(Row)`
 	margin-top: 40px;
