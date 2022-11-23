@@ -11,21 +11,26 @@ import { Col, Row } from '../../styled-components/grid';
 import { StyledDatePicker } from '../../styled-components/datePicker';
 import Spinner from '../../Spinner';
 import useTotalDonations from '../../../hooks/useTotalDonations';
-import useFetchCategoryDonations from '../../../hooks/useFetchCategoryDonations';
-import CategoryDonations from './CategoryDonations';
-import { nowMinusOneMonth, thousandsSeparator } from '../../../lib/helpers';
+import useCategoryDonations from '../../../hooks/useCategoryDonations';
+import CategoryChart from './charts/CategoryChart';
+import {
+	firstOfNextMonth,
+	firstOfThisYear,
+	thousandsSeparator,
+} from '../../../lib/helpers';
 import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
+import TotalDonationsChart from './charts/TotalDonationsChart';
 
 const TotalDonations = () => {
-	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
-	const [toDate, setToDate] = useState(new Date());
-	const { totalDonations = '0', loading: loadingTotal } = useTotalDonations(
+	const [fromDate, setFromDate] = useState(firstOfThisYear());
+	const [toDate, setToDate] = useState(firstOfNextMonth());
+	const { totalDonations, loading: loadingTotal } = useTotalDonations(
 		fromDate,
 		toDate,
 	);
 	const { categoryDonations, loading: loadingCategories } =
-		useFetchCategoryDonations(fromDate, toDate);
+		useCategoryDonations(fromDate, toDate);
 
 	const totalCategoryDonations = categoryDonations?.reduce(
 		(i, j) => i + j.totalUsd,
@@ -36,10 +41,12 @@ const TotalDonations = () => {
 		return {
 			...i,
 			totalUsd:
-				(i.totalUsd * Number(totalDonations)) /
+				(i.totalUsd * Number(totalDonations?.total || 0)) /
 				(totalCategoryDonations || 1),
 		};
 	});
+
+	const { total, totalPerMonthAndYear } = totalDonations || {};
 
 	return (
 		<RowStyled>
@@ -62,9 +69,10 @@ const TotalDonations = () => {
 					From:
 					<StyledDatePicker
 						selected={fromDate}
-						dateFormat='yyyy-MM-dd'
+						dateFormat='yyyy-MM'
 						onChange={(e: Date) => setFromDate(e)}
 						showPopperArrow={false}
+						showMonthYearPicker
 						placeholderText='Select a date'
 					/>
 				</div>
@@ -73,9 +81,10 @@ const TotalDonations = () => {
 					To:
 					<StyledDatePicker
 						selected={toDate}
-						dateFormat='yyyy-MM-dd'
+						dateFormat='yyyy-MM'
 						onChange={(e: Date) => setToDate(e)}
 						showPopperArrow={false}
+						showMonthYearPicker
 						placeholderText='Select a date'
 					/>
 				</div>
@@ -85,13 +94,20 @@ const TotalDonations = () => {
 				{loadingTotal ? (
 					<Spinner />
 				) : (
-					<H2>{thousandsSeparator(totalDonations)}</H2>
+					<H2>{thousandsSeparator(total?.toFixed())}</H2>
 				)}
 			</Col>
+			{loadingTotal ? (
+				<Spinner />
+			) : (
+				<TotalDonationsChart
+					totalPerMonthAndYear={totalPerMonthAndYear!}
+				/>
+			)}
 			{loadingCategories ? (
 				<Spinner />
 			) : (
-				<CategoryDonations categoryDonations={norCategoryDonations} />
+				<CategoryChart categoryDonations={norCategoryDonations} />
 			)}
 		</RowStyled>
 	);

@@ -8,8 +8,8 @@ import {
 	neutralColors,
 	Subline,
 } from '@giveth/ui-design-system';
-import { IconWithTooltip } from '../../IconWithTooltip';
-import { FlexCenter } from '../../styled-components/flex';
+import { IconWithTooltip } from '../../../IconWithTooltip';
+import { FlexCenter } from '../../../styled-components/flex';
 
 interface IProps {
 	categoryDonations?: {
@@ -18,7 +18,7 @@ interface IProps {
 	}[];
 }
 
-const CategoryDonations: FC<IProps> = ({ categoryDonations }) => {
+const CategoryChart: FC<IProps> = ({ categoryDonations }) => {
 	const data = categoryDonations?.map(i => ({
 		name: i.title,
 		y: Math.round(i.totalUsd),
@@ -82,4 +82,4 @@ const Container = styled.div`
 	text-align: center;
 `;
 
-export default CategoryDonations;
+export default CategoryChart;

@@ -6,6 +6,12 @@ export const fetchProjectsCount = `
     projectsPerDate(
       fromDate: $fromDate
       toDate: $toDate
-    )
+    )  {
+      total
+      totalPerMonthAndYear {
+        total
+        date
+      }
+    }
   }
 `;

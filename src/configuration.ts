@@ -1,6 +1,6 @@
 export const isDevelopment = process.env.NEXT_PUBLIC_ENV === 'development';
 
-const BASE_ROUTE = isDevelopment
+const BASE_ROUTE = !isDevelopment
 	? 'https://serve.giveth.io'
 	: 'https://mainnet.serve.giveth.io';
 

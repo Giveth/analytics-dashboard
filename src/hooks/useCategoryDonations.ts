@@ -7,7 +7,7 @@ import {
 } from '../types/gql';
 import { formatDateToISO } from '../lib/helpers';
 
-const useFetchCategoryDonations = (fromDate: Date, toDate: Date) => {
+const useCategoryDonations = (fromDate: Date, toDate: Date) => {
 	const [categoryDonations, setCategoryDonations] =
 		useState<ITotalDonationsPerCategory[]>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -29,4 +29,4 @@ const useFetchCategoryDonations = (fromDate: Date, toDate: Date) => {
 	return { categoryDonations, loading };
 };
 
-export default useFetchCategoryDonations;
+export default useCategoryDonations;

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { backendGQLRequest } from '../lib/requests';
-import { IFetchDonorsCount } from '../types/gql';
+import { IFetchDonorsCount, IResFormat } from '../types/gql';
 import { formatDateToISO } from '../lib/helpers';
 import { fetchDonorsCount } from '../gql/gqlDonors';
 
-const useFetchDonorsCount = (fromDate: Date, toDate: Date) => {
-	const [donorsCount, setDonorsCount] = useState<number>();
+const useDonorsCount = (fromDate: Date, toDate: Date) => {
+	const [donorsCount, setDonorsCount] = useState<IResFormat>();
 	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
@@ -24,4 +24,4 @@ const useFetchDonorsCount = (fromDate: Date, toDate: Date) => {
 	return { donorsCount, loading };
 };
 
-export default useFetchDonorsCount;
+export default useDonorsCount;

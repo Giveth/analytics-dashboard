@@ -6,7 +6,13 @@ export const fetchTotalDonationsUSD = `
     donationsTotalUsdPerDate(
       fromDate: $fromDate
       toDate: $toDate
-    )
+    )  {
+      total
+      totalPerMonthAndYear {
+        total
+        date
+      }
+    }
   }
 `;
 

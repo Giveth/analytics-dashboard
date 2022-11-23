@@ -9,16 +9,23 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { Col, Row } from '../../styled-components/grid';
 import { StyledDatePicker } from '../../styled-components/datePicker';
-import useFetchProjectsCount from '../../../hooks/useFetchProjectsCount';
+import useProjectsCount from '../../../hooks/useProjectsCount';
 import Spinner from '../../Spinner';
-import { nowMinusOneMonth, thousandsSeparator } from '../../../lib/helpers';
+import {
+	firstOfNextMonth,
+	firstOfThisYear,
+	thousandsSeparator,
+} from '../../../lib/helpers';
 import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
+import ProjectsChart from './charts/ProjectsChart';
 
 const ProjectsCount = () => {
-	const [fromDate, setFromDate] = useState(nowMinusOneMonth());
-	const [toDate, setToDate] = useState(new Date());
-	const { projectsCount, loading } = useFetchProjectsCount(fromDate, toDate);
+	const [fromDate, setFromDate] = useState(firstOfThisYear());
+	const [toDate, setToDate] = useState(firstOfNextMonth());
+	const { projectsCount, loading } = useProjectsCount(fromDate, toDate);
+
+	const { total, totalPerMonthAndYear } = projectsCount || {};
 
 	return (
 		<RowStyled>
@@ -41,9 +48,10 @@ const ProjectsCount = () => {
 					From:
 					<StyledDatePicker
 						selected={fromDate}
-						dateFormat='yyyy-MM-dd'
+						dateFormat='yyyy-MM'
 						onChange={(e: Date) => setFromDate(e)}
 						showPopperArrow={false}
+						showMonthYearPicker
 						placeholderText='Select a date'
 					/>
 				</div>
@@ -52,21 +60,23 @@ const ProjectsCount = () => {
 					To:
 					<StyledDatePicker
 						selected={toDate}
-						dateFormat='yyyy-MM-dd'
+						dateFormat='yyyy-MM'
 						onChange={(e: Date) => setToDate(e)}
 						showPopperArrow={false}
+						showMonthYearPicker
 						placeholderText='Select a date'
 					/>
 				</div>
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
-				{loading ? (
-					<Spinner />
-				) : (
-					<H2>{thousandsSeparator(projectsCount)}</H2>
-				)}
+				{loading ? <Spinner /> : <H2>{thousandsSeparator(total)}</H2>}
 			</Col>
+			{loading ? (
+				<Spinner />
+			) : (
+				<ProjectsChart totalPerMonthAndYear={totalPerMonthAndYear!} />
+			)}
 		</RowStyled>
 	);
 };
