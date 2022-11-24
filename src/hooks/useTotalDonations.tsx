@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { backendGQLRequest } from '../lib/requests';
-import { IFetchTotalDonationsUSD } from '../types/gql';
+import { IFetchTotalDonationsUSD, IResFormat } from '../types/gql';
 import { formatDateToISO } from '../lib/helpers';
 import { fetchTotalDonationsUSD } from '../gql/gqlDonations';
 
 const useTotalDonations = (fromDate: Date, toDate: Date) => {
-	const [totalDonations, setTotalDonations] = useState<string>();
+	const [totalDonations, setTotalDonations] = useState<IResFormat>();
 	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
@@ -16,7 +16,7 @@ const useTotalDonations = (fromDate: Date, toDate: Date) => {
 		};
 		backendGQLRequest(fetchTotalDonationsUSD, variables)
 			.then((res: IFetchTotalDonationsUSD) => {
-				const total = res.data.donationsTotalUsdPerDate.toFixed(0);
+				const total = res.data.donationsTotalUsdPerDate;
 				setTotalDonations(total);
 			})
 			.finally(() => setLoading(false));

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { backendGQLRequest } from '../lib/requests';
 import { fetchProjectsCount } from '../gql/gqlProjects';
-import { IFetchProjectsCount } from '../types/gql';
+import { IFetchProjectsCount, IResFormat } from '../types/gql';
 import { formatDateToISO } from '../lib/helpers';
 
-const useFetchProjectsCount = (fromDate: Date, toDate: Date) => {
-	const [projectsCount, setProjectsCount] = useState<number>();
+const useProjectsCount = (fromDate: Date, toDate: Date) => {
+	const [projectsCount, setProjectsCount] = useState<IResFormat>();
 	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
@@ -24,4 +24,4 @@ const useFetchProjectsCount = (fromDate: Date, toDate: Date) => {
 	return { projectsCount, loading };
 };
 
-export default useFetchProjectsCount;
+export default useProjectsCount;

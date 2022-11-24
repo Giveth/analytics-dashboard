@@ -8,9 +8,14 @@ export const formatDateToISO = (time: Date) => {
 	return newDate.toISOString().split('T')[0];
 };
 
-export const nowMinusOneMonth = () => {
+export const firstOfThisYear = () => {
 	const now = new Date();
-	return new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+	return new Date(now.getFullYear(), 0, 1);
+};
+
+export const firstOfNextMonth = () => {
+	const now = new Date();
+	return new Date(now.getFullYear(), now.getMonth() + 1, 1);
 };
 
 export const thousandsSeparator = (x?: string | number) => {

@@ -1,18 +1,29 @@
+export interface IMonthlyData {
+	totalPerMonthAndYear: {
+		total: number;
+		date: string;
+	}[];
+}
+
+export interface IResFormat extends IMonthlyData {
+	total: number;
+}
+
 export interface IFetchProjectsCount {
 	data: {
-		projectsPerDate: number;
+		projectsPerDate: IResFormat;
 	};
 }
 
 export interface IFetchDonorsCount {
 	data: {
-		totalDonorsCountPerDate: number;
+		totalDonorsCountPerDate: IResFormat;
 	};
 }
 
 export interface IFetchTotalDonationsUSD {
 	data: {
-		donationsTotalUsdPerDate: number;
+		donationsTotalUsdPerDate: IResFormat;
 	};
 }
 
