@@ -7,7 +7,7 @@ import { IMonthlyData } from '../../../../types/gql';
 const TotalDonationsChart: FC<IMonthlyData> = ({ totalPerMonthAndYear }) => {
 	const data = totalPerMonthAndYear?.map(i => ({
 		name: i.date,
-		y: i.total,
+		y: Math.round(i.total),
 	}));
 	const options = {
 		chart: {
