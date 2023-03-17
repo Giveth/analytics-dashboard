@@ -32,3 +32,21 @@ export const fetchTotalDonationsPerCategory = `
     }
   }
 `;
+
+export const fetchDonationsCount = `
+  query (
+    $fromDate: String
+    $toDate: String
+  ) {
+    totalDonationsNumberPerDate (
+      fromDate: $fromDate
+      toDate: $toDate
+    ) {
+      total
+      totalPerMonthAndYear {
+        total
+        date
+      }
+    }
+  }
+`;

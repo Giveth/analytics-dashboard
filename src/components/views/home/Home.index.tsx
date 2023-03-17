@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ProjectsCount from './ProjectsCount';
 import DonorsCount from './DonorsCount';
 import TotalDonations from './TotalDonations';
+import DonationsCount from './DonationsCount';
 
 const HomeIndex = () => {
 	return (
@@ -11,6 +12,8 @@ const HomeIndex = () => {
 			<ProjectsCount />
 			<hr />
 			<DonorsCount />
+			<hr />
+			<DonationsCount />
 			<hr />
 			<TotalDonations />
 		</ContainerStyled>
