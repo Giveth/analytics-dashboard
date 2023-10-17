@@ -21,7 +21,7 @@ const useCategoryDonations = (
 		const variables = {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
-			fromOptimism: fromOptimism || false,
+			fromOptimismOnly: fromOptimism || false,
 		};
 		backendGQLRequest(fetchTotalDonationsPerCategory, variables)
 			.then((res: IFetchTotalDonationsPerCategory) => {

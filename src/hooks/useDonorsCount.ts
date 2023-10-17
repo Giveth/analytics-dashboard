@@ -17,7 +17,7 @@ const useDonorsCount = (
 		const variables = {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
-			fromOptimism: fromOptimism || false,
+			fromOptimismOnly: fromOptimism || false,
 		};
 		backendGQLRequest(fetchDonorsCount, variables)
 			.then((res: IFetchDonorsCount) => {

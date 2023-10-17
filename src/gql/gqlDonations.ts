@@ -2,12 +2,12 @@ export const fetchTotalDonationsUSD = `
   query (
     $fromDate: String
     $toDate: String
-    $fromOptimism: Boolean
+    $fromOptimismOnly: Boolean
   ) {
     donationsTotalUsdPerDate (
       fromDate: $fromDate
       toDate: $toDate
-      fromOptimism: $fromOptimism
+      fromOptimismOnly: $fromOptimismOnly
     ) {
       total
       totalPerMonthAndYear {
@@ -22,12 +22,12 @@ export const fetchTotalDonationsPerCategory = `
   query (
     $fromDate: String
     $toDate: String
-    $fromOptimism: Boolean
+    $fromOptimismOnly: Boolean
   ) {
     totalDonationsPerCategory (
       fromDate: $fromDate
       toDate: $toDate
-      fromOptimism: $fromOptimism
+      fromOptimismOnly: $fromOptimismOnly
     ) {
       id
       title
@@ -41,12 +41,12 @@ export const fetchDonationsCount = `
   query (
     $fromDate: String
     $toDate: String
-    $fromOptimism: Boolean
+    $fromOptimismOnly: Boolean
   ) {
     totalDonationsNumberPerDate (
       fromDate: $fromDate
       toDate: $toDate
-      fromOptimism: $fromOptimism
+      fromOptimismOnly: $fromOptimismOnly
     ) {
       total
       totalPerMonthAndYear {
