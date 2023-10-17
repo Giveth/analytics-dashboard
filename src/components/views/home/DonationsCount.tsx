@@ -19,11 +19,17 @@ import { StyledDatePicker } from '../../styled-components/datePicker';
 import Spinner from '../../Spinner';
 import useDonationsCount from '../../../hooks/useDonationsCount';
 import DonationsChart from './charts/DonationsChart';
+import CheckBox from '../../CheckBox';
 
 const DonationsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisYear());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const { donationsCount, loading } = useDonationsCount(fromDate, toDate);
+	const [fromOptimism, setFromOptimism] = useState(false);
+	const { donationsCount, loading } = useDonationsCount(
+		fromDate,
+		toDate,
+		fromOptimism,
+	);
 
 	const { total, totalPerMonthAndYear } = donationsCount || {};
 
@@ -67,6 +73,12 @@ const DonationsCount = () => {
 						placeholderText='Select a date'
 					/>
 				</div>
+				<br />
+				<CheckBox
+					checked={fromOptimism}
+					onChange={setFromOptimism}
+					label='From Optimism chain only'
+				/>
 			</Col>
 			<Col md={1} />
 			<Col md={2}>

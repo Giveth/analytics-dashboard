@@ -19,11 +19,17 @@ import {
 import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import ProjectsChart from './charts/ProjectsChart';
+import CheckBox from '../../CheckBox';
 
 const ProjectsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisYear());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const { projectsCount, loading } = useProjectsCount(fromDate, toDate);
+	const [includesOptimism, setIncludesOptimism] = useState(false);
+	const { projectsCount, loading } = useProjectsCount(
+		fromDate,
+		toDate,
+		includesOptimism,
+	);
 
 	const { total, totalPerMonthAndYear } = projectsCount || {};
 
@@ -67,6 +73,12 @@ const ProjectsCount = () => {
 						placeholderText='Select a date'
 					/>
 				</div>
+				<br />
+				<CheckBox
+					checked={includesOptimism}
+					onChange={setIncludesOptimism}
+					label='Includes Optimism receiving address'
+				/>
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
