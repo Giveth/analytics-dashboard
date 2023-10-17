@@ -17,7 +17,7 @@ import {
 	thousandsSeparator,
 } from '../../../lib/helpers';
 import { IconWithTooltip } from '../../IconWithTooltip';
-import { FlexCenter } from '../../styled-components/flex';
+import { Flex, FlexCenter } from '../../styled-components/flex';
 import ProjectsChart from './charts/ProjectsChart';
 import CheckBox from '../../CheckBox';
 
@@ -74,11 +74,25 @@ const ProjectsCount = () => {
 					/>
 				</div>
 				<br />
-				<CheckBox
-					checked={includesOptimism}
-					onChange={setIncludesOptimism}
-					label='Includes Optimism receiving address'
-				/>
+				<Flex alignItems='center' gap='10px'>
+					<CheckBox
+						checked={includesOptimism}
+						onChange={setIncludesOptimism}
+						label='Includes Optimism receiving address'
+					/>
+					<IconWithTooltip
+						icon={<IconHelpFilled16 />}
+						direction={'top'}
+					>
+						<TooltipBody>
+							When this is checked, projects that are verified and
+							has OP as receiving address are shown, and when not
+							checked, all projects with receiving addresses in
+							any chain and also including not verified projects
+							will be shown
+						</TooltipBody>
+					</IconWithTooltip>
+				</Flex>
 			</Col>
 			<Col md={1} />
 			<Col md={2}>

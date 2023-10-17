@@ -2,6 +2,7 @@
   "name": "analytics-dashboard",
   "version": "0.1.0",
   "private": false,
+  "license": "UNLICENSED",
   "author": "Ramin Ramazanpour",
   "scripts": {
     "dev": "next dev",
