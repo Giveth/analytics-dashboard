@@ -1,3 +1,5 @@
+import { gToast, ToastType } from '../components/Toast';
+
 export const isSSR = () => {
 	return typeof window === 'undefined';
 };
@@ -20,4 +22,17 @@ export const firstOfNextMonth = () => {
 
 export const thousandsSeparator = (x?: string | number) => {
 	return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+export const showToastError = (err: any) => {
+	let errorMessage =
+		typeof err === 'string' ? err : JSON.stringify(err.message || err);
+	if (errorMessage.startsWith('"') && errorMessage.endsWith('"')) {
+		errorMessage = errorMessage.slice(1, -1);
+	}
+	gToast(errorMessage, {
+		type: ToastType.DANGER,
+		position: 'top-center',
+	});
+	console.log({ err });
 };
