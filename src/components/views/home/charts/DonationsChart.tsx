@@ -52,7 +52,7 @@ const DonationsChart: FC<IMonthlyData> = ({ totalPerMonthAndYear }) => {
 };
 
 const ChartContainer = styled.div`
-	margin-top: 30px;
+	margin-top: 60px;
 `;
 
 export default DonationsChart;

@@ -19,11 +19,17 @@ import {
 import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import DonorsChart from './charts/DonorsChart';
+import CheckBox from '../../CheckBox';
 
 const DonorsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisYear());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const { donorsCount, loading } = useDonorsCount(fromDate, toDate);
+	const [fromOptimism, setFromOptimism] = useState(false);
+	const { donorsCount, loading } = useDonorsCount(
+		fromDate,
+		toDate,
+		fromOptimism,
+	);
 
 	const { total, totalPerMonthAndYear } = donorsCount || {};
 
@@ -67,6 +73,12 @@ const DonorsCount = () => {
 						placeholderText='Select a date'
 					/>
 				</div>
+				<br />
+				<CheckBox
+					checked={fromOptimism}
+					onChange={setFromOptimism}
+					label='From Optimism chain only'
+				/>
 			</Col>
 			<Col md={1} />
 			<Col md={2}>

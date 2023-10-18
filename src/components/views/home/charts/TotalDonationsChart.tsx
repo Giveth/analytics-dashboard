@@ -7,7 +7,7 @@ import { IMonthlyData } from '../../../../types/gql';
 const TotalDonationsChart: FC<IMonthlyData> = ({ totalPerMonthAndYear }) => {
 	const data = totalPerMonthAndYear?.map(i => ({
 		name: i.date,
-		y: Math.round(i.total),
+		y: Math.round(i.total * 100) / 100,
 	}));
 	const options = {
 		chart: {
@@ -52,7 +52,7 @@ const TotalDonationsChart: FC<IMonthlyData> = ({ totalPerMonthAndYear }) => {
 };
 
 const ChartContainer = styled.div`
-	margin-top: 30px;
+	margin-top: 60px;
 `;
 
 export default TotalDonationsChart;

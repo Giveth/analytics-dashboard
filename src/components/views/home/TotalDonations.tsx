@@ -21,16 +21,19 @@ import {
 import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import TotalDonationsChart from './charts/TotalDonationsChart';
+import CheckBox from '../../CheckBox';
 
 const TotalDonations = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisYear());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
+	const [fromOptimism, setFromOptimism] = useState(false);
 	const { totalDonations, loading: loadingTotal } = useTotalDonations(
 		fromDate,
 		toDate,
+		fromOptimism,
 	);
 	const { categoryDonations, loading: loadingCategories } =
-		useCategoryDonations(fromDate, toDate);
+		useCategoryDonations(fromDate, toDate, fromOptimism);
 
 	const totalCategoryDonations = categoryDonations?.reduce(
 		(i, j) => i + j.totalUsd,
@@ -88,13 +91,19 @@ const TotalDonations = () => {
 						placeholderText='Select a date'
 					/>
 				</div>
+				<br />
+				<CheckBox
+					checked={fromOptimism}
+					onChange={setFromOptimism}
+					label='From Optimism chain only'
+				/>
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
 				{loadingTotal ? (
 					<Spinner />
 				) : (
-					<H2>{thousandsSeparator(total?.toFixed())}</H2>
+					<H2>{thousandsSeparator(total?.toFixed(2))}</H2>
 				)}
 			</Col>
 			{loadingTotal ? (

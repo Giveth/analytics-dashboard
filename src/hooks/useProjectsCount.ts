@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react';
 import { backendGQLRequest } from '../lib/requests';
 import { fetchProjectsCount } from '../gql/gqlProjects';
 import { IFetchProjectsCount, IResFormat } from '../types/gql';
-import { formatDateToISO } from '../lib/helpers';
+import { formatDateToISO, showToastError } from '../lib/helpers';
 
-const useProjectsCount = (fromDate: Date, toDate: Date) => {
+const useProjectsCount = (
+	fromDate: Date,
+	toDate: Date,
+	includesOptimism?: boolean,
+) => {
 	const [projectsCount, setProjectsCount] = useState<IResFormat>();
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -13,13 +17,15 @@ const useProjectsCount = (fromDate: Date, toDate: Date) => {
 		const variables = {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
+			includesOptimism: includesOptimism || false,
 		};
 		backendGQLRequest(fetchProjectsCount, variables)
 			.then((res: IFetchProjectsCount) => {
 				setProjectsCount(res.data.projectsPerDate);
 			})
+			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate]);
+	}, [fromDate, toDate, includesOptimism]);
 
 	return { projectsCount, loading };
 };
