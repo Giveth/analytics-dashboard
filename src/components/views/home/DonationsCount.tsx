@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components';
 import {
 	firstOfNextMonth,
-	firstOfThisYear,
+	firstOfGiveth,
 	thousandsSeparator,
 } from '../../../lib/helpers';
 import { Col, Row } from '../../styled-components/grid';
@@ -22,7 +22,7 @@ import DonationsChart from './charts/DonationsChart';
 import CheckBox from '../../CheckBox';
 
 const DonationsCount = () => {
-	const [fromDate, setFromDate] = useState(firstOfThisYear());
+	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [fromOptimism, setFromOptimism] = useState(false);
 	const { donationsCount, loading } = useDonationsCount(

@@ -15,7 +15,7 @@ import useCategoryDonations from '../../../hooks/useCategoryDonations';
 import CategoryChart from './charts/CategoryChart';
 import {
 	firstOfNextMonth,
-	firstOfThisYear,
+	firstOfGiveth,
 	thousandsSeparator,
 } from '../../../lib/helpers';
 import { IconWithTooltip } from '../../IconWithTooltip';
@@ -24,7 +24,7 @@ import TotalDonationsChart from './charts/TotalDonationsChart';
 import CheckBox from '../../CheckBox';
 
 const TotalDonations = () => {
-	const [fromDate, setFromDate] = useState(firstOfThisYear());
+	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [fromOptimism, setFromOptimism] = useState(false);
 	const { totalDonations, loading: loadingTotal } = useTotalDonations(
@@ -39,6 +39,8 @@ const TotalDonations = () => {
 		(i, j) => i + j.totalUsd,
 		0,
 	);
+
+	console.log('totalCategoryDonations', fromDate);
 
 	const norCategoryDonations = categoryDonations?.map(i => {
 		return {

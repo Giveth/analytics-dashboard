@@ -13,7 +13,7 @@ import Spinner from '../../Spinner';
 import useDonorsCount from '../../../hooks/useDonorsCount';
 import {
 	firstOfNextMonth,
-	firstOfThisYear,
+	firstOfGiveth,
 	thousandsSeparator,
 } from '../../../lib/helpers';
 import { IconWithTooltip } from '../../IconWithTooltip';
@@ -22,7 +22,7 @@ import DonorsChart from './charts/DonorsChart';
 import CheckBox from '../../CheckBox';
 
 const DonorsCount = () => {
-	const [fromDate, setFromDate] = useState(firstOfThisYear());
+	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [fromOptimism, setFromOptimism] = useState(false);
 	const { donorsCount, loading } = useDonorsCount(

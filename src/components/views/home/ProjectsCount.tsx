@@ -13,7 +13,7 @@ import useProjectsCount from '../../../hooks/useProjectsCount';
 import Spinner from '../../Spinner';
 import {
 	firstOfNextMonth,
-	firstOfThisYear,
+	firstOfGiveth,
 	thousandsSeparator,
 } from '../../../lib/helpers';
 import { IconWithTooltip } from '../../IconWithTooltip';
@@ -22,7 +22,7 @@ import ProjectsChart from './charts/ProjectsChart';
 import CheckBox from '../../CheckBox';
 
 const ProjectsCount = () => {
-	const [fromDate, setFromDate] = useState(firstOfThisYear());
+	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [includesOptimism, setIncludesOptimism] = useState(false);
 	const { projectsCount, loading } = useProjectsCount(

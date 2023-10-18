@@ -10,9 +10,8 @@ export const formatDateToISO = (time: Date) => {
 	return newDate.toISOString().split('T')[0];
 };
 
-export const firstOfThisYear = () => {
-	const now = new Date();
-	return new Date(now.getFullYear(), 0, 1);
+export const firstOfGiveth = () => {
+	return new Date('2016/01/01');
 };
 
 export const firstOfNextMonth = () => {
