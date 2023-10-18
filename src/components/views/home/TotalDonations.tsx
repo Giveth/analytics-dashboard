@@ -103,7 +103,7 @@ const TotalDonations = () => {
 				{loadingTotal ? (
 					<Spinner />
 				) : (
-					<H2>{thousandsSeparator(total?.toFixed())}</H2>
+					<H2>{thousandsSeparator(total?.toFixed(2))}</H2>
 				)}
 			</Col>
 			{loadingTotal ? (

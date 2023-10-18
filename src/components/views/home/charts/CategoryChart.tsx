@@ -21,7 +21,7 @@ interface IProps {
 const CategoryChart: FC<IProps> = ({ categoryDonations }) => {
 	const data = categoryDonations?.map(i => ({
 		name: i.title,
-		y: Math.round(i.totalUsd),
+		y: Math.round(i.totalUsd * 100) / 100,
 	}));
 	const options = {
 		chart: {
