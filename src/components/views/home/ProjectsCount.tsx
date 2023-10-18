@@ -85,11 +85,11 @@ const ProjectsCount = () => {
 						direction={'top'}
 					>
 						<TooltipBody>
-							When this is checked, projects that are verified and
-							has OP as receiving address are shown, and when not
-							checked, all projects with receiving addresses in
-							any chain and also including not verified projects
-							will be shown
+							When this option is selected, only projects that are
+							verified and have the receiving address as OP will
+							be displayed. When it's not selected, projects from
+							any network, including those that aren't verified,
+							will be shown.
 						</TooltipBody>
 					</IconWithTooltip>
 				</Flex>

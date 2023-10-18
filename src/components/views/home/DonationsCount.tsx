@@ -77,7 +77,7 @@ const DonationsCount = () => {
 				<CheckBox
 					checked={fromOptimism}
 					onChange={setFromOptimism}
-					label='From Optimism chain only'
+					label='From Optimism only'
 				/>
 			</Col>
 			<Col md={1} />
