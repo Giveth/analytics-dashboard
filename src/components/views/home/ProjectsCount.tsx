@@ -25,10 +25,15 @@ const ProjectsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [includesOptimism, setIncludesOptimism] = useState(false);
+	const [onlyVerified, setOnlyVerified] = useState(false);
+	const [onlyListed, setOnlyListed] = useState(false);
+
 	const { projectsCount, loading } = useProjectsCount(
 		fromDate,
 		toDate,
 		includesOptimism,
+		onlyVerified,
+		onlyListed,
 	);
 
 	const { total, totalPerMonthAndYear } = projectsCount || {};
@@ -85,14 +90,23 @@ const ProjectsCount = () => {
 						direction={'top'}
 					>
 						<TooltipBody>
-							When this option is selected, only projects that are
-							verified and have the receiving address as OP will
-							be displayed. When it's not selected, projects from
-							any network, including those that aren't verified,
-							will be shown.
+							When this option is selected, projects that doesn't
+							have OP as receiving address won't be displayed.
 						</TooltipBody>
 					</IconWithTooltip>
 				</Flex>
+				<br />
+				<CheckBox
+					checked={onlyVerified}
+					onChange={setOnlyVerified}
+					label='Show only verified projects'
+				/>
+				<br />
+				<CheckBox
+					checked={onlyListed}
+					onChange={setOnlyListed}
+					label='Show only listed projects'
+				/>
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
