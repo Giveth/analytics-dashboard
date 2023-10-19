@@ -6,11 +6,15 @@ export const fetchProjectsCount = `
     $fromDate: String
     $toDate: String
     $includesOptimism: Boolean
+    $onlyVerified: Boolean
+    $onlyListed: Boolean
   ) {
     projectsPerDate(
       fromDate: $fromDate
       toDate: $toDate
       includesOptimism: $includesOptimism
+      onlyVerified: $onlyVerified
+      onlyListed: $onlyListed
     ) {
       total
       totalPerMonthAndYear {

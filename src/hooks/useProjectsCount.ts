@@ -8,6 +8,8 @@ const useProjectsCount = (
 	fromDate: Date,
 	toDate: Date,
 	includesOptimism?: boolean,
+	onlyVerified?: boolean,
+	onlyListed?: boolean,
 ) => {
 	const [projectsCount, setProjectsCount] = useState<IResFormat>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -18,6 +20,8 @@ const useProjectsCount = (
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
 			includesOptimism: includesOptimism || false,
+			onlyVerified: onlyVerified || false,
+			onlyListed: onlyListed || false,
 		};
 		backendGQLRequest(fetchProjectsCount, variables)
 			.then((res: IFetchProjectsCount) => {
@@ -25,7 +29,7 @@ const useProjectsCount = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, includesOptimism]);
+	}, [fromDate, toDate, includesOptimism, onlyListed, onlyVerified]);
 
 	return { projectsCount, loading };
 };
