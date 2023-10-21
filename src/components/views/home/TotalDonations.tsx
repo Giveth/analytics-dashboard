@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {
 	H2,
 	H4,
+	H6,
 	IconHelpFilled16,
 	neutralColors,
 	Subline,
@@ -102,6 +103,7 @@ const TotalDonations = () => {
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
+				<H6>Total (USD):</H6>
 				{loadingTotal ? (
 					<Spinner />
 				) : (

@@ -1,6 +1,7 @@
 import {
 	H2,
 	H4,
+	H6,
 	IconHelpFilled16,
 	neutralColors,
 	Subline,
@@ -90,8 +91,9 @@ const ProjectsCount = () => {
 						direction={'top'}
 					>
 						<TooltipBody>
-							When this option is selected, projects that doesn't
-							have OP as receiving address won't be displayed.
+							When this option is selected, projects that don't
+							have an Optimism receiving address are omitted from
+							the query.
 						</TooltipBody>
 					</IconWithTooltip>
 				</Flex>
@@ -110,6 +112,7 @@ const ProjectsCount = () => {
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
+				<H6>Total:</H6>
 				{loading ? <Spinner /> : <H2>{thousandsSeparator(total)}</H2>}
 			</Col>
 			{loading ? (
