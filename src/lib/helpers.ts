@@ -14,6 +14,11 @@ export const firstOfGiveth = () => {
 	return new Date('2016/01/01');
 };
 
+export const firstOfThisMonth = () => {
+	const now = new Date();
+	return new Date(now.getFullYear(), now.getMonth(), 1);
+};
+
 export const firstOfNextMonth = () => {
 	const now = new Date();
 	return new Date(now.getFullYear(), now.getMonth() + 1, 1);
