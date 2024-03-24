@@ -31,3 +31,17 @@ export const fetchNewDonorsCount = `
     }
   }
 `;
+
+export const fetchNewDonorsDonationTotalUsd = `
+  query (
+    $fromDate: String!
+    $toDate: String!
+  ) {
+    newDonorsDonationTotalUsdPerDate(
+      fromDate: $fromDate
+      toDate: $toDate
+    ) {
+      total
+    }
+  }
+`;
