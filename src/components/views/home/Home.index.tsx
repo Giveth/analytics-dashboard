@@ -4,6 +4,8 @@ import ProjectsCount from './ProjectsCount';
 import DonorsCount from './DonorsCount';
 import TotalDonations from './TotalDonations';
 import DonationsCount from './DonationsCount';
+import NewDonorsCount from './NewDonorsCount';
+import NewDonorsDonationTotalUsd from './NewDonorsDonationTotalUsd';
 
 const HomeIndex = () => {
 	return (
@@ -16,6 +18,10 @@ const HomeIndex = () => {
 			<DonationsCount />
 			<hr />
 			<TotalDonations />
+			<hr />
+			<NewDonorsCount />
+			<hr />
+			<NewDonorsDonationTotalUsd />
 		</ContainerStyled>
 	);
 };

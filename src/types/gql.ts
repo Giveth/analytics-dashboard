@@ -21,6 +21,22 @@ export interface IFetchDonorsCount {
 	};
 }
 
+export interface IFetchNewDonorsCount {
+	data: {
+		newDonorsCountPerDate: {
+			total: number;
+		};
+	};
+}
+
+export interface IFetchNewDonorsDonationTotalUsd {
+	data: {
+		newDonorsDonationTotalUsdPerDate: {
+			total: number;
+		};
+	};
+}
+
 export interface IFetchDonationsCount {
 	data: {
 		totalDonationsNumberPerDate: IResFormat;
