@@ -24,7 +24,6 @@ const DonorsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const { newDonorsCount, loading } = useNewDonorsCount(fromDate, toDate);
-
 	return (
 		<RowStyled>
 			<Col md={4}>
