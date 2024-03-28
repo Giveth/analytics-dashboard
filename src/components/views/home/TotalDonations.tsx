@@ -9,7 +9,6 @@ import {
 	Subline,
 } from '@giveth/ui-design-system';
 import { Col, Row } from '../../styled-components/grid';
-import { StyledDatePicker } from '../../styled-components/datePicker';
 import Spinner from '../../Spinner';
 import useTotalDonations from '../../../hooks/useTotalDonations';
 import useCategoryDonations from '../../../hooks/useCategoryDonations';
@@ -23,6 +22,7 @@ import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import TotalDonationsChart from './charts/TotalDonationsChart';
 import CheckBox from '../../CheckBox';
+import DatePicker from '../../DatePicker';
 
 const TotalDonations = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
@@ -72,27 +72,11 @@ const TotalDonations = () => {
 			</Col>
 			<Col md={4}>
 				<div>
-					From:
-					<StyledDatePicker
-						selected={fromDate}
-						dateFormat='yyyy-MM'
-						onChange={(e: Date) => setFromDate(e)}
-						showPopperArrow={false}
-						showMonthYearPicker
-						placeholderText='Select a date'
-					/>
+					From: <DatePicker date={fromDate} setDate={setFromDate} />
 				</div>
 				<br />
 				<div>
-					To:
-					<StyledDatePicker
-						selected={toDate}
-						dateFormat='yyyy-MM'
-						onChange={(e: Date) => setToDate(e)}
-						showPopperArrow={false}
-						showMonthYearPicker
-						placeholderText='Select a date'
-					/>
+					To: <DatePicker date={toDate} setDate={setToDate} />
 				</div>
 				<br />
 				<CheckBox

@@ -16,11 +16,11 @@ import {
 import { Col, Row } from '../../styled-components/grid';
 import { FlexCenter } from '../../styled-components/flex';
 import { IconWithTooltip } from '../../IconWithTooltip';
-import { StyledDatePicker } from '../../styled-components/datePicker';
 import Spinner from '../../Spinner';
 import useDonationsCount from '../../../hooks/useDonationsCount';
 import DonationsChart from './charts/DonationsChart';
 import CheckBox from '../../CheckBox';
+import DatePicker from '../../DatePicker';
 
 const DonationsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
@@ -52,27 +52,11 @@ const DonationsCount = () => {
 			</Col>
 			<Col md={4}>
 				<div>
-					From:
-					<StyledDatePicker
-						selected={fromDate}
-						dateFormat='yyyy-MM'
-						onChange={(e: Date) => setFromDate(e)}
-						showPopperArrow={false}
-						showMonthYearPicker
-						placeholderText='Select a date'
-					/>
+					From: <DatePicker date={fromDate} setDate={setFromDate} />
 				</div>
 				<br />
 				<div>
-					To:
-					<StyledDatePicker
-						selected={toDate}
-						dateFormat='yyyy-MM'
-						onChange={(e: Date) => setToDate(e)}
-						showPopperArrow={false}
-						showMonthYearPicker
-						placeholderText='Select a date'
-					/>
+					To: <DatePicker date={toDate} setDate={setToDate} />
 				</div>
 				<br />
 				<CheckBox

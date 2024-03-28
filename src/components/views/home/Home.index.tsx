@@ -6,6 +6,7 @@ import TotalDonations from './TotalDonations';
 import DonationsCount from './DonationsCount';
 import NewDonorsCount from './NewDonorsCount';
 import NewDonorsDonationTotalUsd from './NewDonorsDonationTotalUsd';
+import { isProduction } from '../../../configuration';
 
 const HomeIndex = () => {
 	return (
@@ -18,10 +19,14 @@ const HomeIndex = () => {
 			<DonationsCount />
 			<hr />
 			<TotalDonations />
-			<hr />
-			<NewDonorsCount />
-			<hr />
-			<NewDonorsDonationTotalUsd />
+			{!isProduction && (
+				<>
+					<hr />
+					<NewDonorsCount />
+					<hr />
+					<NewDonorsDonationTotalUsd />
+				</>
+			)}
 		</ContainerStyled>
 	);
 };

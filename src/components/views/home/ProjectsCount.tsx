@@ -9,7 +9,6 @@ import {
 import styled from 'styled-components';
 import { useState } from 'react';
 import { Col, Row } from '../../styled-components/grid';
-import { StyledDatePicker } from '../../styled-components/datePicker';
 import useProjectsCount from '../../../hooks/useProjectsCount';
 import Spinner from '../../Spinner';
 import {
@@ -21,6 +20,7 @@ import { IconWithTooltip } from '../../IconWithTooltip';
 import { Flex, FlexCenter } from '../../styled-components/flex';
 import ProjectsChart from './charts/ProjectsChart';
 import CheckBox from '../../CheckBox';
+import DatePicker from '../../DatePicker';
 
 const ProjectsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
@@ -57,27 +57,11 @@ const ProjectsCount = () => {
 			</Col>
 			<Col md={4}>
 				<div>
-					From:
-					<StyledDatePicker
-						selected={fromDate}
-						dateFormat='yyyy-MM'
-						onChange={(e: Date) => setFromDate(e)}
-						showPopperArrow={false}
-						showMonthYearPicker
-						placeholderText='Select a date'
-					/>
+					From: <DatePicker date={fromDate} setDate={setFromDate} />
 				</div>
 				<br />
 				<div>
-					To:
-					<StyledDatePicker
-						selected={toDate}
-						dateFormat='yyyy-MM'
-						onChange={(e: Date) => setToDate(e)}
-						showPopperArrow={false}
-						showMonthYearPicker
-						placeholderText='Select a date'
-					/>
+					To: <DatePicker date={toDate} setDate={setToDate} />
 				</div>
 				<br />
 				<Flex alignItems='center' gap='10px'>

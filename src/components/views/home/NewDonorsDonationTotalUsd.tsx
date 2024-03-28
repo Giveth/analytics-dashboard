@@ -9,7 +9,6 @@ import {
 } from '@giveth/ui-design-system';
 import styled from 'styled-components';
 import { Col, Row } from '../../styled-components/grid';
-import { StyledDatePicker } from '../../styled-components/datePicker';
 import Spinner from '../../Spinner';
 import {
 	firstOfNextMonth,
@@ -19,6 +18,7 @@ import {
 import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import useNewDonorsDonationTotalUsd from '../../../hooks/useNewDonorsDonationTotalUsd';
+import DatePicker from '../../DatePicker';
 
 const NewDonorsDonationTotalUsd = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
@@ -47,27 +47,11 @@ const NewDonorsDonationTotalUsd = () => {
 			</Col>
 			<Col md={4}>
 				<div>
-					From:
-					<StyledDatePicker
-						selected={fromDate}
-						dateFormat='yyyy-MM'
-						onChange={(e: Date) => setFromDate(e)}
-						showPopperArrow={false}
-						showMonthYearPicker
-						placeholderText='Select a date'
-					/>
+					From: <DatePicker date={fromDate} setDate={setFromDate} />
 				</div>
 				<br />
 				<div>
-					To:
-					<StyledDatePicker
-						selected={toDate}
-						dateFormat='yyyy-MM'
-						onChange={(e: Date) => setToDate(e)}
-						showPopperArrow={false}
-						showMonthYearPicker
-						placeholderText='Select a date'
-					/>
+					To: <DatePicker date={toDate} setDate={setToDate} />
 				</div>
 			</Col>
 			<Col md={1} />
