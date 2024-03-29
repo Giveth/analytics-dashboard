@@ -8,6 +8,7 @@ const useDonationsCount = (
 	fromDate: Date,
 	toDate: Date,
 	fromOptimism?: boolean,
+	onlyVerified?: boolean,
 ) => {
 	const [donationsCount, setDonationsCount] = useState<IResFormat>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -18,6 +19,7 @@ const useDonationsCount = (
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
 			fromOptimismOnly: fromOptimism || false,
+			onlyVerified,
 		};
 		backendGQLRequest(fetchDonationsCount, variables)
 			.then((res: IFetchDonationsCount) => {
@@ -25,7 +27,7 @@ const useDonationsCount = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, fromOptimism]);
+	}, [fromDate, toDate, fromOptimism, onlyVerified]);
 
 	return { donationsCount, loading };
 };

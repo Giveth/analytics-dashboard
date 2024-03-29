@@ -26,10 +26,12 @@ const DonationsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [fromOptimism, setFromOptimism] = useState(false);
+	const [onlyVerified, setOnlyVerified] = useState(false);
 	const { donationsCount, loading } = useDonationsCount(
 		fromDate,
 		toDate,
 		fromOptimism,
+		onlyVerified,
 	);
 
 	const { total, totalPerMonthAndYear } = donationsCount || {};
@@ -63,6 +65,12 @@ const DonationsCount = () => {
 					checked={fromOptimism}
 					onChange={setFromOptimism}
 					label='From Optimism only'
+				/>
+				<br />
+				<CheckBox
+					checked={onlyVerified}
+					onChange={setOnlyVerified}
+					label='To verified projects only'
 				/>
 			</Col>
 			<Col md={1} />
