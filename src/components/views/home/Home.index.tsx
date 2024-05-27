@@ -6,7 +6,6 @@ import TotalDonations from './TotalDonations';
 import DonationsCount from './DonationsCount';
 import NewDonorsCount from './NewDonorsCount';
 import NewDonorsDonationTotalUsd from './NewDonorsDonationTotalUsd';
-import { isDevelopment } from '../../../configuration';
 
 const HomeIndex = () => {
 	return (
