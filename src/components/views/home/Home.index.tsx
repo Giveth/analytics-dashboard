@@ -19,14 +19,10 @@ const HomeIndex = () => {
 			<DonationsCount />
 			<hr />
 			<TotalDonations />
-			{isDevelopment && (
-				<>
-					<hr />
-					<NewDonorsCount />
-					<hr />
-					<NewDonorsDonationTotalUsd />
-				</>
-			)}
+			<hr />
+			<NewDonorsCount />
+			<hr />
+			<NewDonorsDonationTotalUsd />
 		</ContainerStyled>
 	);
 };
