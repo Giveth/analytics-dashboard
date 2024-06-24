@@ -10,7 +10,7 @@ import { formatDateToISO, showToastError } from '../lib/helpers';
 const useCategoryDonations = (
 	fromDate: Date,
 	toDate: Date,
-	selectedNetwork: string,
+	selectedNetworkId?: number,
 	onlyVerified?: boolean,
 ) => {
 	const [categoryDonations, setCategoryDonations] =
@@ -22,7 +22,7 @@ const useCategoryDonations = (
 		const variables = {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
-			network: selectedNetwork,
+			networkId: selectedNetworkId,
 			onlyVerified,
 		};
 		backendGQLRequest(fetchTotalDonationsPerCategory, variables)
@@ -32,7 +32,7 @@ const useCategoryDonations = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, selectedNetwork, onlyVerified]);
+	}, [fromDate, toDate, selectedNetworkId, onlyVerified]);
 
 	return { categoryDonations, loading };
 };

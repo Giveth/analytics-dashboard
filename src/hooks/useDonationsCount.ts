@@ -7,7 +7,7 @@ import { fetchDonationsCount } from '../gql/gqlDonations';
 const useDonationsCount = (
 	fromDate: Date,
 	toDate: Date,
-	selectedNetwork: string,
+	selectedNetworkId?: number,
 	onlyVerified?: boolean,
 ) => {
 	const [donationsCount, setDonationsCount] = useState<IResFormat>();
@@ -18,7 +18,7 @@ const useDonationsCount = (
 		const variables = {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
-			network: selectedNetwork,
+			networkId: selectedNetworkId,
 			onlyVerified,
 		};
 		backendGQLRequest(fetchDonationsCount, variables)
@@ -27,7 +27,7 @@ const useDonationsCount = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, selectedNetwork, onlyVerified]);
+	}, [fromDate, toDate, selectedNetworkId, onlyVerified]);
 
 	return { donationsCount, loading };
 };

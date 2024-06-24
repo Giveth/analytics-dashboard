@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NETWORK_IDS } from '../lib/constants';
 
 interface NetworkSelectProps {
-	selectedNetwork: string;
+	selectedNetwork?: number;
 	onNetworkChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -15,18 +16,19 @@ const NetworkSelect: React.FC<NetworkSelectProps> = ({
 			<label>Select Network: </label>
 			<SelectStyled
 				id='network-select'
-				value={selectedNetwork}
+				value={selectedNetwork !== null ? selectedNetwork : ''}
 				onChange={onNetworkChange}
 			>
-				<option value='mainnet'>Mainnet</option>
-				<option value='gnosis'>Gnosis Chain</option>
-				<option value='optimism'>Optimism</option>
-				<option value='polygon'>Polygon</option>
-				<option value='eth-classic'>Ethereum Classic</option>
-				<option value='solana'>Solana</option>
-				<option value='arbitrum'>Arbitrum</option>
-				<option value='base'>Base</option>
-				<option value='celo'>Celo</option>
+				<option value=''>All Networks</option>
+				<option value={NETWORK_IDS.MAIN_NET}>Mainnet</option>
+				<option value={NETWORK_IDS.XDAI}>Gnosis Chain</option>
+				<option value={NETWORK_IDS.OPTIMISTIC}>Optimism</option>
+				<option value={NETWORK_IDS.POLYGON}>Polygon</option>
+				<option value={NETWORK_IDS.ETC}>Ethereum Classic</option>
+				<option value={NETWORK_IDS.SOLANA_MAINNET}>Solana</option>
+				<option value={NETWORK_IDS.ARBITRUM_MAINNET}>Arbitrum</option>
+				<option value={NETWORK_IDS.BASE_MAINNET}>Base</option>
+				<option value={NETWORK_IDS.CELO}>Celo</option>
 			</SelectStyled>
 		</>
 	);

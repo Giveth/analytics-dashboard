@@ -26,12 +26,12 @@ import NetworkSelect from '../../NetworkSelect';
 const DonationsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const [selectedNetwork, setSelectedNetwork] = useState('mainnet');
+	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const [onlyVerified, setOnlyVerified] = useState(false);
 	const { donationsCount, loading } = useDonationsCount(
 		fromDate,
 		toDate,
-		selectedNetwork,
+		selectedNetworkId,
 		onlyVerified,
 	);
 
@@ -40,7 +40,8 @@ const DonationsCount = () => {
 	const handleNetworkChange = (
 		event: React.ChangeEvent<HTMLSelectElement>,
 	) => {
-		setSelectedNetwork(event.target.value);
+		const value = event.target.value === '' ? undefined : Number(event.target.value);
+		setSelectedNetworkId(value);
 	};
 
 	return (
@@ -69,7 +70,7 @@ const DonationsCount = () => {
 				</div>
 				<br />
 				<NetworkSelect
-					selectedNetwork={selectedNetwork}
+					selectedNetwork={selectedNetworkId}
 					onNetworkChange={handleNetworkChange}
 				/>
 				<br />

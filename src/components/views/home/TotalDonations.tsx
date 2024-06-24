@@ -28,16 +28,16 @@ import NetworkSelect from '../../NetworkSelect';
 const TotalDonations = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const [selectedNetwork, setSelectedNetwork] = useState('mainnet');
+	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const [onlyVerified, setOnlyVerified] = useState(false);
 	const { totalDonations, loading: loadingTotal } = useTotalDonations(
 		fromDate,
 		toDate,
-		selectedNetwork,
+		selectedNetworkId,
 		onlyVerified,
 	);
 	const { categoryDonations, loading: loadingCategories } =
-		useCategoryDonations(fromDate, toDate, selectedNetwork, onlyVerified);
+		useCategoryDonations(fromDate, toDate, selectedNetworkId, onlyVerified);
 
 	const totalCategoryDonations = categoryDonations?.reduce(
 		(i, j) => i + j.totalUsd,
@@ -58,7 +58,8 @@ const TotalDonations = () => {
 	const handleNetworkChange = (
 		event: React.ChangeEvent<HTMLSelectElement>,
 	) => {
-		setSelectedNetwork(event.target.value);
+		const value = event.target.value === '' ? undefined : Number(event.target.value);
+		setSelectedNetworkId(value);
 	};
 
 	return (
@@ -87,7 +88,7 @@ const TotalDonations = () => {
 				</div>
 				<br />
 				<NetworkSelect
-					selectedNetwork={selectedNetwork}
+					selectedNetwork={selectedNetworkId}
 					onNetworkChange={handleNetworkChange}
 				/>
 				<br />

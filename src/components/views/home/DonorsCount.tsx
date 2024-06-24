@@ -25,17 +25,18 @@ import NetworkSelect from '../../NetworkSelect';
 const DonorsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const [selectedNetwork, setSelectedNetwork] = useState('mainnet');
+	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const { donorsCount, loading } = useDonorsCount(
 		fromDate,
 		toDate,
-		selectedNetwork,
+		selectedNetworkId,
 	);
 
 	const handleNetworkChange = (
 		event: React.ChangeEvent<HTMLSelectElement>,
 	) => {
-		setSelectedNetwork(event.target.value);
+		const value = event.target.value === '' ? undefined : Number(event.target.value);
+		setSelectedNetworkId(value);
 	};
 
 	const { total, totalPerMonthAndYear } = donorsCount || {};
@@ -66,7 +67,7 @@ const DonorsCount = () => {
 				</div>
 				<br />
 				<NetworkSelect
-					selectedNetwork={selectedNetwork}
+					selectedNetwork={selectedNetworkId}
 					onNetworkChange={handleNetworkChange}
 				/>
 			</Col>

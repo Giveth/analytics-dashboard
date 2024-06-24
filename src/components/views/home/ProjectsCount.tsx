@@ -7,7 +7,7 @@ import {
 	Subline,
 } from '@giveth/ui-design-system';
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Col, Row } from '../../styled-components/grid';
 import useProjectsCount from '../../../hooks/useProjectsCount';
 import Spinner from '../../Spinner';
@@ -26,24 +26,25 @@ import NetworkSelect from '../../NetworkSelect';
 const ProjectsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const [selectedNetwork, setSelectedNetwork] = useState('mainnet');
+	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const [onlyVerified, setOnlyVerified] = useState(false);
 	const [onlyListed, setOnlyListed] = useState(false);
 
 	const { projectsCount, loading } = useProjectsCount(
 		fromDate,
 		toDate,
-		selectedNetwork,
+		selectedNetworkId,
 		onlyVerified,
 		onlyListed,
 	);
 
 	const { total, totalPerMonthAndYear } = projectsCount || {};
 
-	const handleNetworkChange = (event: {
-		target: { value: React.SetStateAction<string> };
-	}) => {
-		setSelectedNetwork(event.target.value);
+	const handleNetworkChange = (
+		event: React.ChangeEvent<HTMLSelectElement>,
+	) => {
+		const value = event.target.value === '' ? undefined : Number(event.target.value);
+		setSelectedNetworkId(value);
 	};
 
 	return (
@@ -73,7 +74,7 @@ const ProjectsCount = () => {
 				<br />
 				<Flex alignItems='center' gap='10px'>
 					<NetworkSelect
-						selectedNetwork={selectedNetwork}
+						selectedNetwork={selectedNetworkId}
 						onNetworkChange={handleNetworkChange}
 					/>
 					<IconWithTooltip

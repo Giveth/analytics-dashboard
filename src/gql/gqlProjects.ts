@@ -2,14 +2,14 @@ export const fetchProjectsCount = `
   query (
     $fromDate: String
     $toDate: String
-    $network: String
+    $networkId: Int
     $onlyVerified: Boolean
     $onlyListed: Boolean
   ) {
     projectsPerDate(
       fromDate: $fromDate
       toDate: $toDate
-      network: $network
+      networkId: $networkId
       onlyVerified: $onlyVerified
       onlyListed: $onlyListed
     ) {
