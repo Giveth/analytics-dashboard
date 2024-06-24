@@ -21,23 +21,30 @@ import { Flex, FlexCenter } from '../../styled-components/flex';
 import ProjectsChart from './charts/ProjectsChart';
 import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
+import NetworkSelect from '../../NetworkSelect';
 
 const ProjectsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const [includesOptimism, setIncludesOptimism] = useState(false);
+	const [selectedNetwork, setSelectedNetwork] = useState('mainnet');
 	const [onlyVerified, setOnlyVerified] = useState(false);
 	const [onlyListed, setOnlyListed] = useState(false);
 
 	const { projectsCount, loading } = useProjectsCount(
 		fromDate,
 		toDate,
-		includesOptimism,
+		selectedNetwork,
 		onlyVerified,
 		onlyListed,
 	);
 
 	const { total, totalPerMonthAndYear } = projectsCount || {};
+
+	const handleNetworkChange = (event: {
+		target: { value: React.SetStateAction<string> };
+	}) => {
+		setSelectedNetwork(event.target.value);
+	};
 
 	return (
 		<RowStyled>
@@ -65,19 +72,16 @@ const ProjectsCount = () => {
 				</div>
 				<br />
 				<Flex alignItems='center' gap='10px'>
-					<CheckBox
-						checked={includesOptimism}
-						onChange={setIncludesOptimism}
-						label='Includes Optimism receiving address'
+					<NetworkSelect
+						selectedNetwork={selectedNetwork}
+						onNetworkChange={handleNetworkChange}
 					/>
 					<IconWithTooltip
 						icon={<IconHelpFilled16 />}
 						direction={'top'}
 					>
 						<TooltipBody>
-							When this option is selected, projects that don't
-							have an Optimism receiving address are omitted from
-							the query.
+							Filter projects by the selected network.
 						</TooltipBody>
 					</IconWithTooltip>
 				</Flex>

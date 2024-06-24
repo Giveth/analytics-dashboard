@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
 	H2,
 	H4,
@@ -19,18 +19,24 @@ import {
 import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import DonorsChart from './charts/DonorsChart';
-import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
+import NetworkSelect from '../../NetworkSelect';
 
 const DonorsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const [fromOptimism, setFromOptimism] = useState(false);
+	const [selectedNetwork, setSelectedNetwork] = useState('mainnet');
 	const { donorsCount, loading } = useDonorsCount(
 		fromDate,
 		toDate,
-		fromOptimism,
+		selectedNetwork,
 	);
+
+	const handleNetworkChange = (
+		event: React.ChangeEvent<HTMLSelectElement>,
+	) => {
+		setSelectedNetwork(event.target.value);
+	};
 
 	const { total, totalPerMonthAndYear } = donorsCount || {};
 
@@ -59,10 +65,9 @@ const DonorsCount = () => {
 					To: <DatePicker date={toDate} setDate={setToDate} />
 				</div>
 				<br />
-				<CheckBox
-					checked={fromOptimism}
-					onChange={setFromOptimism}
-					label='From Optimism only'
+				<NetworkSelect
+					selectedNetwork={selectedNetwork}
+					onNetworkChange={handleNetworkChange}
 				/>
 			</Col>
 			<Col md={1} />
