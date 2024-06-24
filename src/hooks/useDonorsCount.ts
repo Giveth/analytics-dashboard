@@ -7,7 +7,7 @@ import { fetchDonorsCount } from '../gql/gqlDonors';
 const useDonorsCount = (
 	fromDate: Date,
 	toDate: Date,
-	fromOptimism?: boolean,
+	selectedNetwork: string, // Added selectedNetwork parameter
 ) => {
 	const [donorsCount, setDonorsCount] = useState<IResFormat>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -17,7 +17,7 @@ const useDonorsCount = (
 		const variables = {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
-			fromOptimismOnly: fromOptimism || false,
+			network: selectedNetwork,
 		};
 		backendGQLRequest(fetchDonorsCount, variables)
 			.then((res: IFetchDonorsCount) => {
@@ -25,7 +25,7 @@ const useDonorsCount = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, fromOptimism]);
+	}, [fromDate, toDate, selectedNetwork]);
 
 	return { donorsCount, loading };
 };

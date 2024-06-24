@@ -7,7 +7,7 @@ import { formatDateToISO, showToastError } from '../lib/helpers';
 const useProjectsCount = (
 	fromDate: Date,
 	toDate: Date,
-	includesOptimism?: boolean,
+	selectedNetwork: string,
 	onlyVerified?: boolean,
 	onlyListed?: boolean,
 ) => {
@@ -19,7 +19,7 @@ const useProjectsCount = (
 		const variables = {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
-			includesOptimism: includesOptimism || false,
+			network: selectedNetwork,
 			onlyVerified: onlyVerified || false,
 			onlyListed: onlyListed || false,
 		};
@@ -29,7 +29,7 @@ const useProjectsCount = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, includesOptimism, onlyListed, onlyVerified]);
+	}, [fromDate, toDate, selectedNetwork, onlyListed, onlyVerified]);
 
 	return { projectsCount, loading };
 };
