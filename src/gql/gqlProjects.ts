@@ -2,7 +2,7 @@ export const fetchProjectsCount = `
   query (
     $fromDate: String
     $toDate: String
-    $networkId: Int
+    $networkId: Float
     $onlyVerified: Boolean
     $onlyListed: Boolean
   ) {

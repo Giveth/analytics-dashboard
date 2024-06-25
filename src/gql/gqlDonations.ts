@@ -2,7 +2,7 @@ export const fetchTotalDonationsUSD = `
   query (
     $fromDate: String
     $toDate: String
-    $networkId: Int
+    $networkId: Float
     $onlyVerified: Boolean
   ) {
     donationsTotalUsdPerDate (
@@ -24,7 +24,7 @@ export const fetchTotalDonationsPerCategory = `
   query (
     $fromDate: String
     $toDate: String
-    $networkId: Int
+    $networkId: Float
     $onlyVerified: Boolean
   ) {
     totalDonationsPerCategory (
@@ -45,7 +45,7 @@ export const fetchDonationsCount = `
   query (
     $fromDate: String
     $toDate: String
-    $networkId: Int
+    $networkId: Float
     $onlyVerified: Boolean
   ) {
     totalDonationsNumberPerDate (
