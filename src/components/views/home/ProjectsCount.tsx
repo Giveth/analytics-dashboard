@@ -43,7 +43,8 @@ const ProjectsCount = () => {
 	const handleNetworkChange = (
 		event: React.ChangeEvent<HTMLSelectElement>,
 	) => {
-		const value = event.target.value === '' ? undefined : Number(event.target.value);
+		const value =
+			event.target.value === '' ? undefined : Number(event.target.value);
 		setSelectedNetworkId(value);
 	};
 
