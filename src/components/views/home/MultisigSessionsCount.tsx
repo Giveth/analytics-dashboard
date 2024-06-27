@@ -23,16 +23,23 @@ import useMultisigSessionsCount from '../../../hooks/useMultisigSessionsCount';
 const MultisigSessionsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const { multisigSessionsCount, loading, error } = useMultisigSessionsCount(fromDate, toDate);
+	const { multisigSessionsCount, loading, error } = useMultisigSessionsCount(
+		fromDate,
+		toDate,
+	);
 
 	return (
 		<RowStyled>
 			<Col md={4}>
 				<FlexCenter gap='10px'>
 					<H4>Multisig Sessions Count</H4>
-					<IconWithTooltip icon={<IconHelpFilled16 />} direction={'top'}>
+					<IconWithTooltip
+						icon={<IconHelpFilled16 />}
+						direction={'top'}
+					>
 						<TooltipBody>
-							Total number of multisig sessions during the selected timeframe.
+							Total number of multisig sessions during the
+							selected timeframe.
 						</TooltipBody>
 					</IconWithTooltip>
 				</FlexCenter>
@@ -46,7 +53,11 @@ const MultisigSessionsCount = () => {
 					To: <DatePicker date={toDate} setDate={setToDate} />
 				</div>
 				<br />
-				{loading ? <Spinner /> : <button onClick={() => null}>Fetch Count</button>}
+				{loading ? (
+					<Spinner />
+				) : (
+					<button onClick={() => null}>Fetch Count</button>
+				)}
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
@@ -54,7 +65,11 @@ const MultisigSessionsCount = () => {
 				{loading ? (
 					<Spinner />
 				) : (
-					<H2>{multisigSessionsCount !== null ? thousandsSeparator(multisigSessionsCount) : 'N/A'}</H2>
+					<H2>
+						{multisigSessionsCount !== null
+							? thousandsSeparator(multisigSessionsCount)
+							: 'N/A'}
+					</H2>
 				)}
 				{error && <p style={{ color: 'red' }}>{error}</p>}
 			</Col>
