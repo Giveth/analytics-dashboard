@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
 	H2,
 	H4,
@@ -21,20 +21,29 @@ import useDonationsCount from '../../../hooks/useDonationsCount';
 import DonationsChart from './charts/DonationsChart';
 import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
+import NetworkSelect from '../../NetworkSelect';
 
 const DonationsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const [fromOptimism, setFromOptimism] = useState(false);
+	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const [onlyVerified, setOnlyVerified] = useState(false);
 	const { donationsCount, loading } = useDonationsCount(
 		fromDate,
 		toDate,
-		fromOptimism,
+		selectedNetworkId,
 		onlyVerified,
 	);
 
 	const { total, totalPerMonthAndYear } = donationsCount || {};
+
+	const handleNetworkChange = (
+		event: React.ChangeEvent<HTMLSelectElement>,
+	) => {
+		const value =
+			event.target.value === '' ? undefined : Number(event.target.value);
+		setSelectedNetworkId(value);
+	};
 
 	return (
 		<RowStyled>
@@ -61,11 +70,11 @@ const DonationsCount = () => {
 					To: <DatePicker date={toDate} setDate={setToDate} />
 				</div>
 				<br />
-				<CheckBox
-					checked={fromOptimism}
-					onChange={setFromOptimism}
-					label='From Optimism only'
+				<NetworkSelect
+					selectedNetwork={selectedNetworkId}
+					onNetworkChange={handleNetworkChange}
 				/>
+				<br />
 				<br />
 				<CheckBox
 					checked={onlyVerified}

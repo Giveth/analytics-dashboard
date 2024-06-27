@@ -2,13 +2,13 @@ export const fetchTotalDonationsUSD = `
   query (
     $fromDate: String
     $toDate: String
-    $fromOptimismOnly: Boolean
+    $networkId: Float
     $onlyVerified: Boolean
   ) {
     donationsTotalUsdPerDate (
       fromDate: $fromDate
       toDate: $toDate
-      fromOptimismOnly: $fromOptimismOnly
+      networkId: $networkId
       onlyVerified: $onlyVerified
     ) {
       total
@@ -24,13 +24,13 @@ export const fetchTotalDonationsPerCategory = `
   query (
     $fromDate: String
     $toDate: String
-    $fromOptimismOnly: Boolean
+    $networkId: Float
     $onlyVerified: Boolean
   ) {
     totalDonationsPerCategory (
       fromDate: $fromDate
       toDate: $toDate
-      fromOptimismOnly: $fromOptimismOnly
+      networkId: $networkId
       onlyVerified: $onlyVerified
     ) {
       id
@@ -45,13 +45,13 @@ export const fetchDonationsCount = `
   query (
     $fromDate: String
     $toDate: String
-    $fromOptimismOnly: Boolean
+    $networkId: Float
     $onlyVerified: Boolean
   ) {
     totalDonationsNumberPerDate (
       fromDate: $fromDate
       toDate: $toDate
-      fromOptimismOnly: $fromOptimismOnly
+      networkId: $networkId
       onlyVerified: $onlyVerified
     ) {
       total
