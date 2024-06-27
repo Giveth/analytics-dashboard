@@ -53,11 +53,6 @@ const MultisigSessionsCount = () => {
 					To: <DatePicker date={toDate} setDate={setToDate} />
 				</div>
 				<br />
-				{loading ? (
-					<Spinner />
-				) : (
-					<button onClick={() => null}>Fetch Count</button>
-				)}
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
