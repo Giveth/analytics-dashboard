@@ -24,6 +24,7 @@ const NetworkSelect: React.FC<NetworkSelectProps> = ({
 				<option value={NETWORK_IDS.XDAI}>Gnosis Chain</option>
 				<option value={NETWORK_IDS.OPTIMISTIC}>Optimism</option>
 				<option value={NETWORK_IDS.POLYGON}>Polygon</option>
+				<option value={NETWORK_IDS.ZKEVM_MAINNET}>Polygon zkEVM</option>
 				<option value={NETWORK_IDS.ETC}>Ethereum Classic</option>
 				<option value={NETWORK_IDS.SOLANA_MAINNET}>Solana</option>
 				<option value={NETWORK_IDS.ARBITRUM_MAINNET}>Arbitrum</option>
