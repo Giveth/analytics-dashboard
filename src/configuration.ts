@@ -6,6 +6,7 @@ const BASE_ROUTE = isDevelopment
 
 const config = {
 	BACKEND_LINK: `${BASE_ROUTE}/graphql`,
+	SWIE_AUTH_MICROSERVICE_URL: 'https://mainnet.serve.giveth.io',
 };
 
 export default config;
