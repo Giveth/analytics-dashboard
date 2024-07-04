@@ -14,10 +14,11 @@ import useDonationBoxMetrics from '../../../hooks/useDonationBoxMetrics';
 import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import DatePicker from '../../DatePicker';
+import {firstOfNextMonth, firstOfThisMonth} from "../../../lib/helpers";
 
 const DonationBoxMetrics = () => {
-	const [fromDate, setFromDate] = useState(new Date('2023-01-01'));
-	const [toDate, setToDate] = useState(new Date('2023-01-02'));
+	const [fromDate, setFromDate] = useState(firstOfThisMonth());
+	const [toDate, setToDate] = useState(firstOfNextMonth());
 
 	const { donationMetrics, loading } = useDonationBoxMetrics(
 		fromDate,
@@ -34,15 +35,15 @@ const DonationBoxMetrics = () => {
 		<RowStyled>
 			<Col md={4}>
 				<FlexCenter gap='10px'>
-					<H4>Donation Metrics</H4>
+					<H4>Donation Box Metrics</H4>
 					<IconWithTooltip
 						icon={<IconHelpFilled16 />}
 						direction={'top'}
 					>
 						<TooltipBody>
-							Overview of donation metrics including total
+							Overview of donation box metrics including total
 							donations and average percentage during the selected
-							timeframe.
+							timeframe. Note that the recurring donation is not considered.
 						</TooltipBody>
 					</IconWithTooltip>
 				</FlexCenter>
@@ -58,12 +59,14 @@ const DonationBoxMetrics = () => {
 			</Col>
 			<Col md={1} />
 			<Col md={2}>
-				<H6>Total Donations to Giveth:</H6>
-				{loading ? <Spinner /> : <H2>{totalDonationsToGiveth}</H2>}
-				<H6>Total USD Value to Giveth:</H6>
-				{loading ? <Spinner /> : <H2>{totalUsdValueToGiveth}</H2>}
-				<H6>Average Percentage to Giveth:</H6>
-				{loading ? <Spinner /> : <H2>{averagePercentageToGiveth}%</H2>}
+				<H6>Total Donations to Giveth Using Donation Box:</H6>
+				{loading ? <Spinner/> : <H2>{totalDonationsToGiveth || 0}</H2>}
+				<br/>
+				<H6>Total USD Value to Giveth Using Donation Box:</H6>
+				{loading ? <Spinner/> : <H2>{totalUsdValueToGiveth || 0}</H2>}
+				<br/>
+				<H6>Average Percentage of Donation to Giveth Using Donation Box:</H6>
+				{loading ? <Spinner/> : <H2>{averagePercentageToGiveth || 0}%</H2>}
 			</Col>
 		</RowStyled>
 	);
