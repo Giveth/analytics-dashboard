@@ -59,3 +59,9 @@ export interface ITotalDonationsPerCategory {
 	title: string;
 	totalUsd: number;
 }
+
+export interface IDonationBoxMetrics {
+	totalDonationsToGiveth: number;
+	totalUsdValueToGiveth: number;
+	averagePercentageToGiveth: number;
+}
