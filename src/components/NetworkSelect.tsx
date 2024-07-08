@@ -48,29 +48,69 @@ const NetworkSelect: React.FC<NetworkSelectProps> = ({
 	selectedNetwork,
 	onNetworkChange,
 }) => {
-	const correctNetworkId = selectedNetwork
-		? getCorrectNetworkIdBasedOnEnv(selectedNetwork)
-		: '';
-
 	return (
 		<>
 			<label>Select Network: </label>
 			<SelectStyled
 				id='network-select'
-				value={correctNetworkId}
+				value={selectedNetwork !== undefined ? selectedNetwork : ''}
 				onChange={onNetworkChange}
 			>
 				<option value=''>All Networks</option>
-				<option value={NETWORK_IDS.MAIN_NET}>Mainnet</option>
-				<option value={NETWORK_IDS.XDAI}>Gnosis Chain</option>
-				<option value={NETWORK_IDS.OPTIMISTIC}>Optimism</option>
-				<option value={NETWORK_IDS.POLYGON}>Polygon</option>
-				<option value={NETWORK_IDS.ZKEVM_MAINNET}>Polygon zkEVM</option>
-				<option value={NETWORK_IDS.ETC}>Ethereum Classic</option>
-				<option value={NETWORK_IDS.SOLANA_MAINNET}>Solana</option>
-				<option value={NETWORK_IDS.ARBITRUM_MAINNET}>Arbitrum</option>
-				<option value={NETWORK_IDS.BASE_MAINNET}>Base</option>
-				<option value={NETWORK_IDS.CELO}>Celo</option>
+				<option
+					value={getCorrectNetworkIdBasedOnEnv(NETWORK_IDS.MAIN_NET)}
+				>
+					Mainnet
+				</option>
+				<option value={getCorrectNetworkIdBasedOnEnv(NETWORK_IDS.XDAI)}>
+					Gnosis Chain
+				</option>
+				<option
+					value={getCorrectNetworkIdBasedOnEnv(
+						NETWORK_IDS.OPTIMISTIC,
+					)}
+				>
+					Optimism
+				</option>
+				<option
+					value={getCorrectNetworkIdBasedOnEnv(NETWORK_IDS.POLYGON)}
+				>
+					Polygon
+				</option>
+				<option
+					value={getCorrectNetworkIdBasedOnEnv(
+						NETWORK_IDS.ZKEVM_MAINNET,
+					)}
+				>
+					Polygon zkEVM
+				</option>
+				<option value={getCorrectNetworkIdBasedOnEnv(NETWORK_IDS.ETC)}>
+					Ethereum Classic
+				</option>
+				<option
+					value={getCorrectNetworkIdBasedOnEnv(
+						NETWORK_IDS.SOLANA_MAINNET,
+					)}
+				>
+					Solana
+				</option>
+				<option
+					value={getCorrectNetworkIdBasedOnEnv(
+						NETWORK_IDS.ARBITRUM_MAINNET,
+					)}
+				>
+					Arbitrum
+				</option>
+				<option
+					value={getCorrectNetworkIdBasedOnEnv(
+						NETWORK_IDS.BASE_MAINNET,
+					)}
+				>
+					Base
+				</option>
+				<option value={getCorrectNetworkIdBasedOnEnv(NETWORK_IDS.CELO)}>
+					Celo
+				</option>
 			</SelectStyled>
 		</>
 	);
