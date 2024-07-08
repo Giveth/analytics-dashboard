@@ -2,21 +2,62 @@ import React from 'react';
 import styled from 'styled-components';
 import { NETWORK_IDS } from '../lib/constants';
 
+export const isDevelopment = process.env.NEXT_PUBLIC_ENV === 'development';
+
 interface NetworkSelectProps {
 	selectedNetwork?: number;
 	onNetworkChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+function getCorrectNetworkIdBasedOnEnv(networkId: number) {
+	switch (networkId) {
+		case NETWORK_IDS.ARBITRUM_MAINNET:
+			return isDevelopment
+				? NETWORK_IDS.ARBITRUM_SEPOLIA
+				: NETWORK_IDS.ARBITRUM_MAINNET;
+		case NETWORK_IDS.OPTIMISTIC:
+			return isDevelopment
+				? NETWORK_IDS.OPTIMISM_SEPOLIA
+				: NETWORK_IDS.OPTIMISTIC;
+		case NETWORK_IDS.BASE_MAINNET:
+			return isDevelopment
+				? NETWORK_IDS.BASE_SEPOLIA
+				: NETWORK_IDS.BASE_MAINNET;
+		case NETWORK_IDS.ZKEVM_MAINNET:
+			return isDevelopment
+				? NETWORK_IDS.ZKEVM_CARDONA
+				: NETWORK_IDS.ZKEVM_MAINNET;
+		case NETWORK_IDS.CELO:
+			return isDevelopment
+				? NETWORK_IDS.CELO_ALFAJORES
+				: NETWORK_IDS.CELO;
+		case NETWORK_IDS.SOLANA_MAINNET:
+			return isDevelopment
+				? NETWORK_IDS.SOLANA_TESTNET
+				: NETWORK_IDS.SOLANA_MAINNET;
+		case NETWORK_IDS.ETC:
+			return isDevelopment
+				? NETWORK_IDS.MORDOR_ETC_TESTNET
+				: NETWORK_IDS.ETC;
+		default:
+			return networkId;
+	}
 }
 
 const NetworkSelect: React.FC<NetworkSelectProps> = ({
 	selectedNetwork,
 	onNetworkChange,
 }) => {
+	const correctNetworkId = selectedNetwork
+		? getCorrectNetworkIdBasedOnEnv(selectedNetwork)
+		: '';
+
 	return (
 		<>
 			<label>Select Network: </label>
 			<SelectStyled
 				id='network-select'
-				value={selectedNetwork !== null ? selectedNetwork : ''}
+				value={correctNetworkId}
 				onChange={onNetworkChange}
 			>
 				<option value=''>All Networks</option>
