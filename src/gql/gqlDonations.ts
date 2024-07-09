@@ -69,8 +69,8 @@ export const fetchDonationBoxMetrics = `
     $toDate: String
   ) {
     donationMetrics (
-      fromDate: $fromDate
-      toDate: $toDate
+      startDate: $fromDate
+      endDate: $toDate
     ) {
       totalDonationsToGiveth
       totalUsdValueToGiveth
