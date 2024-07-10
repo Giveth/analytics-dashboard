@@ -2,12 +2,12 @@ export const fetchDonorsCount = `
   query (
     $fromDate: String
     $toDate: String
-    $fromOptimismOnly: Boolean
+    $networkId: Float
   ) {
     totalDonorsCountPerDate(
       fromDate: $fromDate
       toDate: $toDate
-      fromOptimismOnly: $fromOptimismOnly
+      networkId: $networkId
     ) {
       total
       totalPerMonthAndYear {
