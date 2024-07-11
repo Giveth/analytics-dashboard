@@ -6,6 +6,7 @@ import TotalDonations from './TotalDonations';
 import DonationsCount from './DonationsCount';
 import NewDonorsCount from './NewDonorsCount';
 import NewDonorsDonationTotalUsd from './NewDonorsDonationTotalUsd';
+import MultisigSessionsCount from './MultisigSessionsCount';
 
 const HomeIndex = () => {
 	return (
@@ -22,6 +23,8 @@ const HomeIndex = () => {
 			<NewDonorsCount />
 			<hr />
 			<NewDonorsDonationTotalUsd />
+			<hr />
+			<MultisigSessionsCount />
 		</ContainerStyled>
 	);
 };
