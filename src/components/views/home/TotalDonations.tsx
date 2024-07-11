@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
 	H2,
 	H4,
@@ -23,21 +23,20 @@ import { FlexCenter } from '../../styled-components/flex';
 import TotalDonationsChart from './charts/TotalDonationsChart';
 import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
-import NetworkSelect from '../../NetworkSelect';
 
 const TotalDonations = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
+	const [fromOptimism, setFromOptimism] = useState(false);
 	const [onlyVerified, setOnlyVerified] = useState(false);
 	const { totalDonations, loading: loadingTotal } = useTotalDonations(
 		fromDate,
 		toDate,
-		selectedNetworkId,
+		fromOptimism,
 		onlyVerified,
 	);
 	const { categoryDonations, loading: loadingCategories } =
-		useCategoryDonations(fromDate, toDate, selectedNetworkId, onlyVerified);
+		useCategoryDonations(fromDate, toDate, fromOptimism, onlyVerified);
 
 	const totalCategoryDonations = categoryDonations?.reduce(
 		(i, j) => i + j.totalUsd,
@@ -54,14 +53,6 @@ const TotalDonations = () => {
 	});
 
 	const { total, totalPerMonthAndYear } = totalDonations || {};
-
-	const handleNetworkChange = (
-		event: React.ChangeEvent<HTMLSelectElement>,
-	) => {
-		const value =
-			event.target.value === '' ? undefined : Number(event.target.value);
-		setSelectedNetworkId(value);
-	};
 
 	return (
 		<RowStyled>
@@ -88,11 +79,11 @@ const TotalDonations = () => {
 					To: <DatePicker date={toDate} setDate={setToDate} />
 				</div>
 				<br />
-				<NetworkSelect
-					selectedNetwork={selectedNetworkId}
-					onNetworkChange={handleNetworkChange}
+				<CheckBox
+					checked={fromOptimism}
+					onChange={setFromOptimism}
+					label='From Optimism only'
 				/>
-				<br />
 				<br />
 				<CheckBox
 					checked={onlyVerified}
