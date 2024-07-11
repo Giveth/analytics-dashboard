@@ -62,3 +62,19 @@ export const fetchDonationsCount = `
     }
   }
 `;
+
+export const fetchDonationBoxMetrics = `
+  query (
+    $fromDate: String!
+    $toDate: String!
+  ) {
+    donationMetrics (
+      startDate: $fromDate
+      endDate: $toDate
+    ) {
+      totalDonationsToGiveth
+      totalUsdValueToGiveth
+      averagePercentageToGiveth
+    }
+  }
+`;
