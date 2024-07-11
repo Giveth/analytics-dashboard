@@ -7,7 +7,7 @@ import {
 	Subline,
 } from '@giveth/ui-design-system';
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Col, Row } from '../../styled-components/grid';
 import useProjectsCount from '../../../hooks/useProjectsCount';
 import Spinner from '../../Spinner';
@@ -21,23 +21,32 @@ import { Flex, FlexCenter } from '../../styled-components/flex';
 import ProjectsChart from './charts/ProjectsChart';
 import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
+import NetworkSelect from '../../NetworkSelect';
 
 const ProjectsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const [includesOptimism, setIncludesOptimism] = useState(false);
+	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const [onlyVerified, setOnlyVerified] = useState(false);
 	const [onlyListed, setOnlyListed] = useState(false);
 
 	const { projectsCount, loading } = useProjectsCount(
 		fromDate,
 		toDate,
-		includesOptimism,
+		selectedNetworkId,
 		onlyVerified,
 		onlyListed,
 	);
 
 	const { total, totalPerMonthAndYear } = projectsCount || {};
+
+	const handleNetworkChange = (
+		event: React.ChangeEvent<HTMLSelectElement>,
+	) => {
+		const value =
+			event.target.value === '' ? undefined : Number(event.target.value);
+		setSelectedNetworkId(value);
+	};
 
 	return (
 		<RowStyled>
@@ -65,19 +74,16 @@ const ProjectsCount = () => {
 				</div>
 				<br />
 				<Flex alignItems='center' gap='10px'>
-					<CheckBox
-						checked={includesOptimism}
-						onChange={setIncludesOptimism}
-						label='Includes Optimism receiving address'
+					<NetworkSelect
+						selectedNetwork={selectedNetworkId}
+						onNetworkChange={handleNetworkChange}
 					/>
 					<IconWithTooltip
 						icon={<IconHelpFilled16 />}
 						direction={'top'}
 					>
 						<TooltipBody>
-							When this option is selected, projects that don't
-							have an Optimism receiving address are omitted from
-							the query.
+							Filter projects by the selected network.
 						</TooltipBody>
 					</IconWithTooltip>
 				</Flex>
