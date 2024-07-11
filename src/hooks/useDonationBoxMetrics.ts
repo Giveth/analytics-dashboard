@@ -17,6 +17,9 @@ const useDonationBoxMetrics = (fromDate: Date, toDate: Date) => {
 		};
 		backendGQLRequest(fetchDonationBoxMetrics, variables)
 			.then(res => {
+				if (res.errors) {
+					throw new Error(res.errors[0].message);
+				}
 				setDonationMetrics(res.data.donationMetrics);
 			})
 			.catch(showToastError)
