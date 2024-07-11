@@ -26,7 +26,7 @@ const HomeIndex = () => {
 			<NewDonorsDonationTotalUsd />
 			<hr />
 			<DonationBoxMetrics />
-      <hr />
+			<hr />
 			<MultisigSessionsCount />
 		</ContainerStyled>
 	);
