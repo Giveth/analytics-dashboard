@@ -33,7 +33,7 @@ function getCorrectNetworkIdBasedOnEnv(networkId: number) {
 				: NETWORK_IDS.CELO;
 		case NETWORK_IDS.SOLANA_MAINNET:
 			return isDevelopment
-				? NETWORK_IDS.SOLANA_TESTNET
+				? NETWORK_IDS.SOLANA_DEVNET
 				: NETWORK_IDS.SOLANA_MAINNET;
 		case NETWORK_IDS.ETC:
 			return isDevelopment
