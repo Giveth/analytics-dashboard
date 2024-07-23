@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { backendGQLRequest } from "../lib/requests";
-import { IFetchRecurringDonationsTotalUSD, IResFormat } from "../types/gql";
+import { IFetchRecurringDonationsTotalUSD, IResFormatPerToken } from "../types/gql";
 import { formatDateToISO, showToastError } from "../lib/helpers";
 import { fetchRecurringDonationsTotalUSD } from "../gql/gqlRecurringDonations";
 
@@ -13,7 +13,7 @@ const useRecurringDonationsTotalUsd = (
   const [
     recurringDonationsTotaStreanedlUsd,
     setRecurringDonationsTotaStreanedlUsd,
-  ] = useState<IResFormat>();
+  ] = useState<IResFormatPerToken>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {

@@ -66,14 +66,23 @@ export interface IDonationBoxMetrics {
   averagePercentageToGiveth: number;
 }
 
+export interface IRecurringDonationdPerTokenRecord {
+  token: string;
+  total: number;
+}
+
+export interface IResFormatPerToken extends IResFormat {
+  totalPerToken: IRecurringDonationdPerTokenRecord[];
+}
+
 export interface IFetchReccuringDonationsCount {
   data: {
-    recurringDonationsCountPerDate: IResFormat;
+    recurringDonationsCountPerDate: IResFormatPerToken;
   };
 }
 
 export interface IFetchRecurringDonationsTotalUSD {
   data: {
-    recurringDonationsTotalStreamedUsdPerDate: IResFormat;
+    recurringDonationsTotalStreamedUsdPerDate: IResFormatPerToken;
   };
 }

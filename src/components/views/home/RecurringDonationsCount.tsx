@@ -21,27 +21,21 @@ import useRecurringDonationsCount from "../../../hooks/useRecurringDonationsCoun
 import RecurringDonationsCountChat from "./charts/RecurringDonationsCountChat";
 import CheckBox from "../../CheckBox";
 import DatePicker from "../../DatePicker";
-import NetworkSelect from "../../NetworkSelect";
+import RecurringDonationsCountTokenChart from "./charts/RecurringDonationsCountTokenChart";
 
 const RecurringDonationsCount = () => {
   const [fromDate, setFromDate] = useState(firstOfGiveth());
   const [toDate, setToDate] = useState(firstOfNextMonth());
-  const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
   const [onlyVerified, setOnlyVerified] = useState(false);
   const { recurringDonationsCount, loading } = useRecurringDonationsCount(
     fromDate,
     toDate,
-    selectedNetworkId,
+    undefined,
     onlyVerified
   );
 
-  const { total, totalPerMonthAndYear } = recurringDonationsCount || {};
-
-  const handleNetworkChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value =
-      event.target.value === "" ? undefined : Number(event.target.value);
-    setSelectedNetworkId(value);
-  };
+  const { total, totalPerMonthAndYear, totalPerToken } =
+    recurringDonationsCount || {};
 
   return (
     <RowStyled>
@@ -65,12 +59,6 @@ const RecurringDonationsCount = () => {
           To: <DatePicker date={toDate} setDate={setToDate} />
         </div>
         <br />
-        <NetworkSelect
-          selectedNetwork={selectedNetworkId}
-          onNetworkChange={handleNetworkChange}
-        />
-        <br />
-        <br />
         <CheckBox
           checked={onlyVerified}
           onChange={setOnlyVerified}
@@ -88,6 +76,11 @@ const RecurringDonationsCount = () => {
         <RecurringDonationsCountChat
           totalPerMonthAndYear={totalPerMonthAndYear!}
         />
+      )}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <RecurringDonationsCountTokenChart rDonationsPerToken={totalPerToken} />
       )}
     </RowStyled>
   );
