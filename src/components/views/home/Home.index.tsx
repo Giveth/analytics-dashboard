@@ -25,8 +25,8 @@ const HomeIndex = () => {
       <hr />
       <RecurringDonationsCount />
       <hr />
-	  <RecurringDonationsTotalUsd />
-	  <hr />
+      <RecurringDonationsTotalUsd />
+      <hr />
       <NewDonorsCount />
       <hr />
       <NewDonorsDonationTotalUsd />
