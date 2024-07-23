@@ -4,7 +4,9 @@ import HighchartsReact from 'highcharts-react-official';
 import styled from 'styled-components';
 import { IMonthlyData } from '../../../../types/gql';
 
-const RecurringDonationsTotalChart: FC<IMonthlyData> = ({ totalPerMonthAndYear }) => {
+const RecurringDonationsTotalChart: FC<IMonthlyData> = ({
+	totalPerMonthAndYear,
+}) => {
 	const data = totalPerMonthAndYear?.map(i => ({
 		name: i.date,
 		y: Math.round(i.total * 100) / 100,

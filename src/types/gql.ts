@@ -1,88 +1,88 @@
 export interface IMonthlyData {
-  totalPerMonthAndYear: {
-    total: number;
-    date: string;
-  }[];
+	totalPerMonthAndYear: {
+		total: number;
+		date: string;
+	}[];
 }
 
 export interface IResFormat extends IMonthlyData {
-  total: number;
+	total: number;
 }
 
 export interface IFetchProjectsCount {
-  data: {
-    projectsPerDate: IResFormat;
-  };
+	data: {
+		projectsPerDate: IResFormat;
+	};
 }
 
 export interface IFetchDonorsCount {
-  data: {
-    totalDonorsCountPerDate: IResFormat;
-  };
+	data: {
+		totalDonorsCountPerDate: IResFormat;
+	};
 }
 
 export interface IFetchNewDonorsCount {
-  data: {
-    newDonorsCountPerDate: {
-      total: number;
-    };
-  };
+	data: {
+		newDonorsCountPerDate: {
+			total: number;
+		};
+	};
 }
 
 export interface IFetchNewDonorsDonationTotalUsd {
-  data: {
-    newDonorsDonationTotalUsdPerDate: {
-      total: number;
-    };
-  };
+	data: {
+		newDonorsDonationTotalUsdPerDate: {
+			total: number;
+		};
+	};
 }
 
 export interface IFetchDonationsCount {
-  data: {
-    totalDonationsNumberPerDate: IResFormat;
-  };
+	data: {
+		totalDonationsNumberPerDate: IResFormat;
+	};
 }
 
 export interface IFetchTotalDonationsUSD {
-  data: {
-    donationsTotalUsdPerDate: IResFormat;
-  };
+	data: {
+		donationsTotalUsdPerDate: IResFormat;
+	};
 }
 
 export interface IFetchTotalDonationsPerCategory {
-  data: {
-    totalDonationsPerCategory: ITotalDonationsPerCategory[];
-  };
+	data: {
+		totalDonationsPerCategory: ITotalDonationsPerCategory[];
+	};
 }
 
 export interface ITotalDonationsPerCategory {
-  title: string;
-  totalUsd: number;
+	title: string;
+	totalUsd: number;
 }
 
 export interface IDonationBoxMetrics {
-  totalDonationsToGiveth: number;
-  totalUsdValueToGiveth: number;
-  averagePercentageToGiveth: number;
+	totalDonationsToGiveth: number;
+	totalUsdValueToGiveth: number;
+	averagePercentageToGiveth: number;
 }
 
 export interface IRecurringDonationdPerTokenRecord {
-  token: string;
-  total: number;
+	token: string;
+	total: number;
 }
 
 export interface IResFormatPerToken extends IResFormat {
-  totalPerToken: IRecurringDonationdPerTokenRecord[];
+	totalPerToken: IRecurringDonationdPerTokenRecord[];
 }
 
 export interface IFetchReccuringDonationsCount {
-  data: {
-    recurringDonationsCountPerDate: IResFormatPerToken;
-  };
+	data: {
+		recurringDonationsCountPerDate: IResFormatPerToken;
+	};
 }
 
 export interface IFetchRecurringDonationsTotalUSD {
-  data: {
-    recurringDonationsTotalStreamedUsdPerDate: IResFormatPerToken;
-  };
+	data: {
+		recurringDonationsTotalStreamedUsdPerDate: IResFormatPerToken;
+	};
 }
