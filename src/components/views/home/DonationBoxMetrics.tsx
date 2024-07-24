@@ -16,6 +16,9 @@ import { FlexCenter } from '../../styled-components/flex';
 import DatePicker from '../../DatePicker';
 import { firstOfNextMonth, firstOfThisMonth } from '../../../lib/helpers';
 
+const formatNumber = (number: number | undefined) =>
+	number ? number.toFixed(2) : '0.00';
+
 const DonationBoxMetrics = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
@@ -64,7 +67,11 @@ const DonationBoxMetrics = () => {
 				{loading ? <Spinner /> : <H2>{totalDonationsToGiveth || 0}</H2>}
 				<br />
 				<H6>Total USD Value to Giveth Using Donation Box:</H6>
-				{loading ? <Spinner /> : <H2>{totalUsdValueToGiveth || 0}</H2>}
+				{loading ? (
+					<Spinner />
+				) : (
+					<H2>{formatNumber(totalUsdValueToGiveth)}</H2>
+				)}
 				<br />
 				<H6>
 					Average Percentage of Donation to Giveth Using Donation Box:
@@ -72,7 +79,7 @@ const DonationBoxMetrics = () => {
 				{loading ? (
 					<Spinner />
 				) : (
-					<H2>{averagePercentageToGiveth || 0}%</H2>
+					<H2>{formatNumber(averagePercentageToGiveth)}%</H2>
 				)}
 			</Col>
 		</RowStyled>
