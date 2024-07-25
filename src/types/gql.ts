@@ -60,12 +60,6 @@ export interface ITotalDonationsPerCategory {
 	totalUsd: number;
 }
 
-export interface IDonationBoxMetrics {
-	totalDonationsToGiveth: number;
-	totalUsdValueToGiveth: number;
-	averagePercentageToGiveth: number;
-}
-
 export interface IRecurringDonationdPerTokenRecord {
 	token: string;
 	total: number;
