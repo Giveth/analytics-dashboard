@@ -16,8 +16,11 @@ import { FlexCenter } from '../../styled-components/flex';
 import DatePicker from '../../DatePicker';
 import { firstOfNextMonth, firstOfThisMonth } from '../../../lib/helpers';
 
-const formatNumber = (number: number | undefined) =>
-	number ? number.toFixed(2) : '0.00';
+const formatNumber = (number?: number) => {
+	return parseFloat(String(number || 0)).toLocaleString('en-US', {
+		maximumFractionDigits: 2,
+	});
+};
 
 const DonationBoxMetrics = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
