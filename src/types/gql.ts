@@ -43,6 +43,18 @@ export interface IFetchDonationsCount {
 	};
 }
 
+export interface IDonationTokenStats {
+	currency: string;
+	uniqueDonorCount: number;
+	currencyPercentage: number;
+}
+
+export interface IFetchDonationTokenStats {
+	data: {
+		getDonationStats: IDonationTokenStats[];
+	};
+}
+
 export interface IFetchTotalDonationsUSD {
 	data: {
 		donationsTotalUsdPerDate: IResFormat;

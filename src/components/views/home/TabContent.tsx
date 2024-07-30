@@ -9,6 +9,7 @@ import DonationBoxMetrics from './DonationBoxMetrics';
 import MultisigSessionsCount from './MultisigSessionsCount';
 import RecurringDonationsCount from './RecurringDonationsCount';
 import RecurringDonationsTotalUsd from './RecurringDonationsTotalUsd';
+import DonationTokenStats from './DonationTokenStats';
 
 interface TabContentProps {
 	activeTab: string;
@@ -28,6 +29,8 @@ const TabContent: React.FC<TabContentProps> = ({ activeTab }) => {
 					<NewDonorsCount />
 					<hr />
 					<NewDonorsDonationTotalUsd />
+					<hr />
+					<DonationTokenStats />
 				</>
 			)}
 			{activeTab === 'Recurring Donations' && (
