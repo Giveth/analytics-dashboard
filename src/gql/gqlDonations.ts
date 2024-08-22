@@ -78,3 +78,21 @@ export const fetchDonationBoxMetrics = `
     }
   }
 `;
+
+export const fetchDonationTokenStats = `
+  query (
+    $fromDate: String
+    $toDate: String
+    $networkId: Float
+  ) {
+    getDonationStats(
+      fromDate: $fromDate
+      toDate: $toDate
+      networkId: $networkId
+    ) {
+        currency
+        uniqueDonorCount
+        currencyPercentage
+    }
+  }
+`;

@@ -1,49 +1,33 @@
 import { Container, H1 } from '@giveth/ui-design-system';
 import styled from 'styled-components';
-import ProjectsCount from './ProjectsCount';
-import DonorsCount from './DonorsCount';
-import TotalDonations from './TotalDonations';
-import DonationsCount from './DonationsCount';
-import NewDonorsCount from './NewDonorsCount';
-import NewDonorsDonationTotalUsd from './NewDonorsDonationTotalUsd';
-import DonationBoxMetrics from './DonationBoxMetrics';
-import MultisigSessionsCount from './MultisigSessionsCount';
-import RecurringDonationsCount from './RecurringDonationsCount';
-import RecurringDonationsTotalUsd from './RecurringDonationsTotalUsd';
+import { useState } from 'react';
+import Tabs from './Tabs';
+import TabContent from './TabContent';
 
 const HomeIndex = () => {
+	const [activeTab, setActiveTab] = useState<string>('Donations');
+
 	return (
 		<ContainerStyled>
+			<Tabs setActiveTab={setActiveTab} activeTab={activeTab} />
 			<H1 weight={700}>Giveth Analytics Dashboard</H1>
-			<ProjectsCount />
-			<hr />
-			<DonorsCount />
-			<hr />
-			<DonationsCount />
-			<hr />
-			<TotalDonations />
-			<hr />
-			<RecurringDonationsCount />
-			<hr />
-			<RecurringDonationsTotalUsd />
-			<hr />
-			<NewDonorsCount />
-			<hr />
-			<NewDonorsDonationTotalUsd />
-			<hr />
-			<DonationBoxMetrics />
-			<hr />
-			<MultisigSessionsCount />
+			<Content>
+				<TabContent activeTab={activeTab} />
+			</Content>
 		</ContainerStyled>
 	);
 };
 
 const ContainerStyled = styled(Container)`
-	margin-top: 120px;
+	margin-top: 80px;
 	margin-bottom: 120px;
-	> h1:first-child {
+	> h1:nth-child(2) {
 		text-align: center;
 	}
+`;
+
+const Content = styled.div`
+	margin-top: 20px;
 `;
 
 export default HomeIndex;

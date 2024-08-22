@@ -130,10 +130,7 @@ export function backendGQLRequest(
 	return postRequest(
 		config.BACKEND_LINK,
 		true,
-		{
-			query,
-			variables,
-		},
+		{ query, variables },
 		additionalHeaders,
 		additionalOptions,
 	);
