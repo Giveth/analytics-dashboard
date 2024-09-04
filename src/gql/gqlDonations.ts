@@ -4,12 +4,14 @@ export const fetchTotalDonationsUSD = `
     $toDate: String
     $networkId: Float
     $onlyVerified: Boolean
+    $onlyEndaoment: Boolean
   ) {
     donationsTotalUsdPerDate (
       fromDate: $fromDate
       toDate: $toDate
       networkId: $networkId
       onlyVerified: $onlyVerified
+      onlyEndaoment: $onlyEndaoment
     ) {
       total
       totalPerMonthAndYear {
@@ -26,12 +28,14 @@ export const fetchTotalDonationsPerCategory = `
     $toDate: String
     $networkId: Float
     $onlyVerified: Boolean
+    $onlyEndaoment: Boolean
   ) {
     totalDonationsPerCategory (
       fromDate: $fromDate
       toDate: $toDate
       networkId: $networkId
       onlyVerified: $onlyVerified
+      onlyEndaoment: $onlyEndaoment
     ) {
       id
       title
@@ -47,12 +51,14 @@ export const fetchDonationsCount = `
     $toDate: String
     $networkId: Float
     $onlyVerified: Boolean
+    $onlyEndaoment: Boolean
   ) {
     totalDonationsNumberPerDate (
       fromDate: $fromDate
       toDate: $toDate
       networkId: $networkId
       onlyVerified: $onlyVerified
+      onlyEndaoment: $onlyEndaoment
     ) {
       total
       totalPerMonthAndYear {

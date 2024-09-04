@@ -3,11 +3,13 @@ export const fetchDonorsCount = `
     $fromDate: String
     $toDate: String
     $networkId: Float
+    $onlyEndaoment: Boolean
   ) {
     totalDonorsCountPerDate(
       fromDate: $fromDate
       toDate: $toDate
       networkId: $networkId
+      onlyEndaoment: $onlyEndaoment
     ) {
       total
       totalPerMonthAndYear {
