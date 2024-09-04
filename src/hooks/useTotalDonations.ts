@@ -9,6 +9,7 @@ const useTotalDonations = (
 	toDate: Date,
 	selectedNetworkId?: number,
 	onlyVerified?: boolean,
+	onlyEndaoment?: boolean,
 ) => {
 	const [totalDonations, setTotalDonations] = useState<IResFormat>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -20,6 +21,7 @@ const useTotalDonations = (
 			toDate: formatDateToISO(toDate),
 			networkId: selectedNetworkId,
 			onlyVerified,
+			onlyEndaoment,
 		};
 		backendGQLRequest(fetchTotalDonationsUSD, variables)
 			.then((res: IFetchTotalDonationsUSD) => {
@@ -28,7 +30,7 @@ const useTotalDonations = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, selectedNetworkId, onlyVerified]);
+	}, [fromDate, toDate, selectedNetworkId, onlyVerified, onlyEndaoment]);
 
 	return { totalDonations, loading };
 };

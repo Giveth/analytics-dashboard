@@ -28,11 +28,13 @@ const DonationsCount = () => {
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const [onlyVerified, setOnlyVerified] = useState(false);
+	const [onlyEndaoment, setOnlyEndaoment] = useState<boolean>(false);
 	const { donationsCount, loading } = useDonationsCount(
 		fromDate,
 		toDate,
 		selectedNetworkId,
 		onlyVerified,
+		onlyEndaoment,
 	);
 
 	const { total, totalPerMonthAndYear } = donationsCount || {};
@@ -80,6 +82,12 @@ const DonationsCount = () => {
 					checked={onlyVerified}
 					onChange={setOnlyVerified}
 					label='To verified projects only'
+				/>
+				<br />
+				<CheckBox
+					checked={onlyEndaoment}
+					onChange={setOnlyEndaoment}
+					label='To endaoment projects only'
 				/>
 			</Col>
 			<Col md={1} />

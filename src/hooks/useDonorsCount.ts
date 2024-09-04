@@ -8,6 +8,7 @@ const useDonorsCount = (
 	fromDate: Date,
 	toDate: Date,
 	selectedNetworkId?: number,
+	onlyEndaoment?: boolean,
 ) => {
 	const [donorsCount, setDonorsCount] = useState<IResFormat>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -18,6 +19,7 @@ const useDonorsCount = (
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
 			networkId: selectedNetworkId,
+			onlyEndaoment,
 		};
 		backendGQLRequest(fetchDonorsCount, variables)
 			.then((res: IFetchDonorsCount) => {
@@ -25,7 +27,7 @@ const useDonorsCount = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, selectedNetworkId]);
+	}, [fromDate, toDate, selectedNetworkId, onlyEndaoment]);
 
 	return { donorsCount, loading };
 };

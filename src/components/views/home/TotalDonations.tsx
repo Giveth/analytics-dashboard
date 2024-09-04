@@ -30,14 +30,22 @@ const TotalDonations = () => {
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const [onlyVerified, setOnlyVerified] = useState(false);
+	const [onlyEndaoment, setOnlyEndaoment] = useState<boolean>(false);
 	const { totalDonations, loading: loadingTotal } = useTotalDonations(
 		fromDate,
 		toDate,
 		selectedNetworkId,
 		onlyVerified,
+		onlyEndaoment,
 	);
 	const { categoryDonations, loading: loadingCategories } =
-		useCategoryDonations(fromDate, toDate, selectedNetworkId, onlyVerified);
+		useCategoryDonations(
+			fromDate,
+			toDate,
+			selectedNetworkId,
+			onlyVerified,
+			onlyEndaoment,
+		);
 
 	const totalCategoryDonations = categoryDonations?.reduce(
 		(i, j) => i + j.totalUsd,
@@ -98,6 +106,12 @@ const TotalDonations = () => {
 					checked={onlyVerified}
 					onChange={setOnlyVerified}
 					label='To verified projects only'
+				/>
+				<br />
+				<CheckBox
+					checked={onlyEndaoment}
+					onChange={setOnlyEndaoment}
+					label='To endaoment projects only'
 				/>
 			</Col>
 			<Col md={1} />
