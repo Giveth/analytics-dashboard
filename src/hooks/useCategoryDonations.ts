@@ -12,6 +12,7 @@ const useCategoryDonations = (
 	toDate: Date,
 	selectedNetworkId?: number,
 	onlyVerified?: boolean,
+	onlyEndaoment?: boolean,
 ) => {
 	const [categoryDonations, setCategoryDonations] =
 		useState<ITotalDonationsPerCategory[]>();
@@ -24,6 +25,7 @@ const useCategoryDonations = (
 			toDate: formatDateToISO(toDate),
 			networkId: selectedNetworkId,
 			onlyVerified,
+			onlyEndaoment,
 		};
 		backendGQLRequest(fetchTotalDonationsPerCategory, variables)
 			.then((res: IFetchTotalDonationsPerCategory) => {
@@ -32,7 +34,7 @@ const useCategoryDonations = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, selectedNetworkId, onlyVerified]);
+	}, [fromDate, toDate, selectedNetworkId, onlyVerified, onlyEndaoment]);
 
 	return { categoryDonations, loading };
 };

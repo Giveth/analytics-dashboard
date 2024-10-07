@@ -21,15 +21,18 @@ import { FlexCenter } from '../../styled-components/flex';
 import DonorsChart from './charts/DonorsChart';
 import DatePicker from '../../DatePicker';
 import NetworkSelect from '../../NetworkSelect';
+import CheckBox from '../../CheckBox';
 
 const DonorsCount = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
+	const [onlyEndaoment, setOnlyEndaoment] = useState<boolean>(false);
 	const { donorsCount, loading } = useDonorsCount(
 		fromDate,
 		toDate,
 		selectedNetworkId,
+		onlyEndaoment,
 	);
 
 	const handleNetworkChange = (
@@ -70,6 +73,13 @@ const DonorsCount = () => {
 				<NetworkSelect
 					selectedNetwork={selectedNetworkId}
 					onNetworkChange={handleNetworkChange}
+				/>
+				<br />
+				<br />
+				<CheckBox
+					checked={onlyEndaoment}
+					onChange={setOnlyEndaoment}
+					label='To endaoment projects only'
 				/>
 			</Col>
 			<Col md={1} />
