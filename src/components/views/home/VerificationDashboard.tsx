@@ -23,7 +23,7 @@ import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
 import NetworkSelect from '../../NetworkSelect';
 
-const DeVouchDashboard = () => {
+const VerificationDashboard = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
@@ -125,4 +125,4 @@ const RowStyled = styled(Row)`
 	margin-bottom: 40px;
 `;
 
-export default DeVouchDashboard;
+export default VerificationDashboard;
