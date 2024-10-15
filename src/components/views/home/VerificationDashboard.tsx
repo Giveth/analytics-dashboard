@@ -19,9 +19,8 @@ import {
 import { IconWithTooltip } from '../../IconWithTooltip';
 import { Flex, FlexCenter } from '../../styled-components/flex';
 import ProjectsChart from './charts/ProjectsChart';
-import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
-import NetworkSelect from '../../NetworkSelect';
+import CheckBox from '../../CheckBox';
 
 const VerificationDashboard = () => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
@@ -40,66 +39,43 @@ const VerificationDashboard = () => {
 
 	const { total, totalPerMonthAndYear } = projectsCount || {};
 
-	const handleNetworkChange = (
-		event: React.ChangeEvent<HTMLSelectElement>,
-	) => {
-		const value =
-			event.target.value === '' ? undefined : Number(event.target.value);
-		setSelectedNetworkId(value);
-	};
-
 	return (
-		<RowStyled>
-			<Col md={4}>
-				<FlexCenter gap='10px'>
-					<H4>Active Projects Count</H4>
-					<IconWithTooltip
-						icon={<IconHelpFilled16 />}
-						direction={'top'}
-					>
-						<TooltipBody>
-							Total number of new projects onboarded during the
-							selected timeframe.
-						</TooltipBody>
-					</IconWithTooltip>
-				</FlexCenter>
-			</Col>
-			<Col md={4}>
-				<div>
+		<>
+			<RowStyled>
+				<Col>
+					<FlexCenter gap='10px'>
+						<H4>Vouches made by Giveth Verifiers</H4>
+						<IconWithTooltip
+							icon={<IconHelpFilled16 />}
+							direction={'top'}
+						>
+							<TooltipBody>
+								Total number of vouches made by Giveth Verifiers
+								on ALL projects on Giveth
+							</TooltipBody>
+						</IconWithTooltip>
+					</FlexCenter>
+				</Col>
+			</RowStyled>
+			<RowStyled>
+				<Col md={6}>
 					From: <DatePicker date={fromDate} setDate={setFromDate} />
-				</div>
-				<br />
-				<div>
+				</Col>
+				<Col md={6}>
 					To: <DatePicker date={toDate} setDate={setToDate} />
-				</div>
-				<br />
-				<Flex alignItems='center' gap='10px'>
-					<NetworkSelect
-						selectedNetwork={selectedNetworkId}
-						onNetworkChange={handleNetworkChange}
+				</Col>
+			</RowStyled>
+			<RowStyled>
+				<Flex gap='10px' wrap={1}>
+					<H6>Filters:</H6>
+					<CheckBox
+						checked={onlyVerified}
+						onChange={setOnlyVerified}
+						label='Show only verified projects'
+						size={16}
 					/>
-					<IconWithTooltip
-						icon={<IconHelpFilled16 />}
-						direction={'top'}
-					>
-						<TooltipBody>
-							Filter projects by the selected network.
-						</TooltipBody>
-					</IconWithTooltip>
 				</Flex>
-				<br />
-				<CheckBox
-					checked={onlyVerified}
-					onChange={setOnlyVerified}
-					label='Show only verified projects'
-				/>
-				<br />
-				<CheckBox
-					checked={onlyListed}
-					onChange={setOnlyListed}
-					label='Show only listed projects'
-				/>
-			</Col>
+			</RowStyled>
 			<Col md={1} />
 			<Col md={2}>
 				<H6>Total:</H6>
@@ -110,7 +86,7 @@ const VerificationDashboard = () => {
 			) : (
 				<ProjectsChart totalPerMonthAndYear={totalPerMonthAndYear!} />
 			)}
-		</RowStyled>
+		</>
 	);
 };
 
@@ -121,7 +97,6 @@ const TooltipBody = styled(Subline)`
 
 const RowStyled = styled(Row)`
 	margin-top: 40px;
-	align-items: center;
 	margin-bottom: 40px;
 `;
 
