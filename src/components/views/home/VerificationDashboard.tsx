@@ -66,21 +66,31 @@ const VerificationDashboard = () => {
 				</Col>
 			</RowStyled>
 			<RowStyled>
-				<Flex gap='10px' wrap={1}>
-					<H6>Filters:</H6>
-					<CheckBox
-						checked={onlyVerified}
-						onChange={setOnlyVerified}
-						label='Show only verified projects'
-						size={16}
-					/>
-				</Flex>
+				<Col>
+					<FilterRows gap='10px' wrap={1}>
+						<H6>Filters:</H6>
+						<CheckBox
+							checked={onlyVerified}
+							onChange={setOnlyVerified}
+							label='Show only verified projects'
+							size={16}
+						/>
+					</FilterRows>
+				</Col>
 			</RowStyled>
-			<Col md={1} />
-			<Col md={2}>
-				<H6>Total:</H6>
-				{loading ? <Spinner /> : <H2>{thousandsSeparator(total)}</H2>}
-			</Col>
+			<RowStyled>
+				<Col>
+					<FlexCenter gap='10px' direction='column'>
+						<H6>Total:</H6>
+						{loading ? (
+							<Spinner />
+						) : (
+							<H2>{thousandsSeparator(total)}</H2>
+						)}
+					</FlexCenter>
+				</Col>
+			</RowStyled>
+			<Col md={2}></Col>
 			{loading ? (
 				<Spinner />
 			) : (
@@ -98,6 +108,13 @@ const TooltipBody = styled(Subline)`
 const RowStyled = styled(Row)`
 	margin-top: 40px;
 	margin-bottom: 40px;
+`;
+
+const FilterRows = styled(Flex)`
+	margin-top: -16px;
+	padding: 16px 24px;
+	border-radius: 8px;
+	background-color: ${neutralColors.gray[200]};
 `;
 
 export default VerificationDashboard;
