@@ -99,16 +99,20 @@ export interface IFetchRecurringDonationsTotalUSD {
 	};
 }
 
-export interface IFetchVouchesCount {
+export interface IVouchCountPerMonth {
+	countWithComments: number;
+	countWithoutComments: number;
+	totalCount: number;
+	date: string;
+}
+
+export interface IVouchCountInfo {
+	total: number;
+	totalPerMonth: IVouchCountPerMonth[];
+}
+
+export interface IFetchVouchesCountRes {
 	data: {
-		getOrganisationVouchCountByDate: {
-			total: number;
-			totalPerMonth: {
-				countWithComments: number;
-				countWithoutComments: number;
-				totalCount: number;
-				date: string;
-			}[];
-		};
+		getOrganisationVouchCountByDate: IVouchCountInfo;
 	};
 }
