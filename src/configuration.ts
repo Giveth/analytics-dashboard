@@ -11,7 +11,7 @@ const SWIE_AUTH_ROUTE = isDevelopment
 const config = {
 	BACKEND_LINK: `${BASE_ROUTE}/graphql`,
 	SWIE_AUTH_MICROSERVICE_URL: SWIE_AUTH_ROUTE,
-	DEVOUCH_BACKEND_URL: `https://backend.devouch.xyz/graphql`,
+	DEVOUCH_BACKEND_URL: `https://optimism.backend.devouch.xyz/graphql`,
 };
 
 export default config;
