@@ -108,6 +108,7 @@ export interface IVouchCountPerMonth {
 
 export interface IVouchCountInfo {
 	total: number;
+	totalWithComments: number;
 	totalPerMonth: IVouchCountPerMonth[];
 }
 
