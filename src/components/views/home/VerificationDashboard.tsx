@@ -22,6 +22,7 @@ import { useVouchesCount } from '../../../hooks/useVouchesCount';
 import { GIVETH_VERIFIERS_ORG_ID } from '../../../lib/constants';
 import Spinner from '../../Spinner';
 import VerificationChart from './charts/VerificationChart';
+import VerificationPieChart from './charts/VerificationPieChart';
 
 const VerificationDashboard = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
@@ -109,6 +110,11 @@ const VerificationDashboard = () => {
 					vouchCountsPerMonth={vouchCountInfo?.totalPerMonth!}
 					showWithComments={showComment}
 				/>
+			)}
+			{loading ? (
+				<Spinner />
+			) : (
+				<VerificationPieChart vouchCounts={vouchCountInfo} />
 			)}
 		</>
 	);
