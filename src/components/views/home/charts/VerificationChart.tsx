@@ -6,14 +6,13 @@ import { IVouchCountPerMonth } from '../../../../types/gql';
 
 interface IVerificationChartProps {
 	vouchCountsPerMonth: IVouchCountPerMonth[];
-	showWithComments: boolean; // New prop to control visibility of with comments data
+	showWithComments: boolean;
 }
 
 const VerificationChart: FC<IVerificationChartProps> = ({
 	vouchCountsPerMonth,
-	showWithComments, // Destructure the new prop
+	showWithComments,
 }) => {
-	// Prepare data for both total counts and counts with comments
 	const totalCountsData = vouchCountsPerMonth?.map(vouchCountPerMonth => ({
 		name: vouchCountPerMonth.date,
 		y: vouchCountPerMonth.totalCount,
@@ -24,7 +23,6 @@ const VerificationChart: FC<IVerificationChartProps> = ({
 		y: vouchCountPerMonth.countWithComments,
 	}));
 
-	// Define the chart options
 	const options = {
 		chart: {
 			type: 'column',
@@ -47,7 +45,7 @@ const VerificationChart: FC<IVerificationChartProps> = ({
 		},
 		tooltip: {
 			enabled: true,
-			shared: true, // Enable shared tooltips
+			shared: true,
 			headerFormat: '<b>{point.key}</b><br/>',
 			pointFormat: '<b>{series.name}: {point.y}</b><br/>',
 		},
@@ -58,15 +56,15 @@ const VerificationChart: FC<IVerificationChartProps> = ({
 			{
 				name: 'Total Vouches',
 				data: totalCountsData,
-				color: '#7cb5ec', // Color for the total counts
+				color: '#7cb5ec',
 			},
-			// Conditionally add the "Vouches with Comments" series if the prop is true
+
 			...(showWithComments
 				? [
 						{
 							name: 'Vouches with Comments',
 							data: withCommentsData,
-							color: '#90ed7d', // Color for vouches with comments
+							color: '#90ed7d',
 						},
 				  ]
 				: []),
