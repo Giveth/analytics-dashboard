@@ -135,3 +135,18 @@ export function backendGQLRequest(
 		additionalOptions,
 	);
 }
+
+export function deVouchGQLRequest(
+	query: string,
+	variables: {} = {},
+	additionalHeaders: HeadersInit = {},
+	additionalOptions: RequestInit = {},
+) {
+	return postRequest(
+		config.DEVOUCH_BACKEND_URL,
+		true,
+		{ query, variables },
+		additionalHeaders,
+		additionalOptions,
+	);
+}

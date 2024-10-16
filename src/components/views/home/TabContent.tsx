@@ -10,6 +10,7 @@ import MultisigSessionsCount from './MultisigSessionsCount';
 import RecurringDonationsCount from './RecurringDonationsCount';
 import RecurringDonationsTotalUsd from './RecurringDonationsTotalUsd';
 import DonationTokenStats from './DonationTokenStats';
+import VerificationDashboard from './VerificationDashboard';
 
 interface TabContentProps {
 	activeTab: string;
@@ -53,6 +54,11 @@ const TabContent: React.FC<TabContentProps> = ({ activeTab }) => {
 			{activeTab === 'Optional Donation Box' && (
 				<>
 					<DonationBoxMetrics />
+				</>
+			)}
+			{activeTab === 'Verification' && (
+				<>
+					<VerificationDashboard />
 				</>
 			)}
 		</>

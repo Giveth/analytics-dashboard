@@ -19,6 +19,7 @@ const Tabs: React.FC<TabsProps> = ({ setActiveTab, activeTab }) => {
 				'Projects',
 				'Multisig',
 				'Optional Donation Box',
+				'Verification',
 			].map(tab => (
 				<Tab
 					key={tab}
