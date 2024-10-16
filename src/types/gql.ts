@@ -98,3 +98,17 @@ export interface IFetchRecurringDonationsTotalUSD {
 		recurringDonationsTotalStreamedUsdPerDate: IResFormatPerToken;
 	};
 }
+
+export interface IFetchVouchesCount {
+	data: {
+		getOrganisationVouchCountByDate: {
+			total: number;
+			totalPerMonth: {
+				countWithComments: number;
+				countWithoutComments: number;
+				totalCount: number;
+				date: string;
+			}[];
+		};
+	};
+}
