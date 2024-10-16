@@ -18,17 +18,18 @@ interface IProps {
 
 const VerificationPieChart: FC<IProps> = ({ vouchCounts }) => {
 	const totalWithComments = vouchCounts?.totalWithComments || 0;
-	const totalWithoutComments =
-		vouchCounts?.total || 0 - totalWithComments || 0;
+	const totalWithoutComments = (vouchCounts?.total || 0) - totalWithComments;
 
 	const data = [
 		{
-			name: `${totalWithComments} (with comments)`,
+			name: `With comments`,
 			y: totalWithComments,
+			color: '#90ed7d',
 		},
 		{
-			name: `${totalWithoutComments} (without comments)`,
+			name: `Without comments`,
 			y: totalWithoutComments,
+			color: '#7cb5ec',
 		},
 	];
 
@@ -42,7 +43,7 @@ const VerificationPieChart: FC<IProps> = ({ vouchCounts }) => {
 		},
 		tooltip: {
 			enabled: true,
-			pointFormat: '<b>{point.y}</b>',
+			pointFormat: '<b>{point.name}</b>: {point.y}',
 		},
 		series: [
 			{
@@ -65,11 +66,11 @@ const VerificationPieChart: FC<IProps> = ({ vouchCounts }) => {
 	return (
 		<Container>
 			<FlexCenter gap='10px'>
-				<H5>Recurring Donations Count Per Token</H5>
+				<H5>Vouch Distribution with and without Comments</H5>
 				<IconWithTooltip icon={<IconHelpFilled16 />} direction={'top'}>
 					<TooltipBody>
-						Current distribution of all recurring donations by token
-						during the selected timeframe.
+						This chart shows the percentage of vouches with and
+						without comments during the selected timeframe.
 					</TooltipBody>
 				</IconWithTooltip>
 			</FlexCenter>
