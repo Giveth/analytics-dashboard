@@ -74,22 +74,32 @@ const VerificationDashboard = () => {
 				</Col>
 			</RowStyled>
 			<RowStyled>
-				<Col>
+				<Col md={showComment ? 6 : 12}>
 					<FlexCenter gap='10px' direction='column'>
-						<H6>Total:</H6>
+						<H6>Total Vouches:</H6>
 						{loading ? (
 							<Spinner />
 						) : (
-							<H2>
-								{formatAmount(
-									showComment
-										? vouchCountInfo?.totalWithComments || 0
-										: vouchCountInfo?.total || 0,
-								)}
-							</H2>
+							<H2>{formatAmount(vouchCountInfo?.total || 0)}</H2>
 						)}
 					</FlexCenter>
 				</Col>
+				{showComment && (
+					<Col md={6}>
+						<FlexCenter gap='10px' direction='column'>
+							<H6>Total Vouches with Comments:</H6>
+							{loading ? (
+								<Spinner />
+							) : (
+								<H2>
+									{formatAmount(
+										vouchCountInfo?.totalWithComments || 0,
+									)}
+								</H2>
+							)}
+						</FlexCenter>
+					</Col>
+				)}
 			</RowStyled>
 			<Col md={2}></Col>
 			{loading ? (
