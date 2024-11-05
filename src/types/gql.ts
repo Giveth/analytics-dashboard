@@ -117,3 +117,19 @@ export interface IFetchVouchesCountRes {
 		getOrganisationVouchCountByDate: IVouchCountInfo;
 	};
 }
+
+export interface IVouchCountByUser {
+	totalCount: number;
+	attestorId: string;
+}
+
+export interface IAttestorVouchesCountToSource {
+	vouchCountByUser: IVouchCountByUser[];
+	totalVouches: number;
+}
+
+export interface IAttestorVouchesCountToSourceRes {
+	data: {
+		getOrganisationUserVouchCountBySource: IAttestorVouchesCountToSource;
+	};
+}
