@@ -120,12 +120,14 @@ export interface IFetchVouchesCountRes {
 
 export interface IVouchCountByUser {
 	totalCount: number;
+	countWithComments: number;
 	attestorId: string;
 }
 
 export interface IAttestorVouchesCountToSource {
 	vouchCountByUser: IVouchCountByUser[];
 	totalVouches: number;
+	totalWithComments: number;
 }
 
 export interface IAttestorVouchesCountToSourceRes {
