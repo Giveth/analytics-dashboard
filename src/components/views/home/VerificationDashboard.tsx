@@ -23,6 +23,7 @@ import { GIVETH_VERIFIERS_ORG_ID } from '../../../lib/constants';
 import Spinner from '../../Spinner';
 import VerificationChart from './charts/VerificationChart';
 import VerificationCommentsPieChart from './charts/VerificationCommentsPieChart';
+import VerificationAttestorsPieChart from './charts/VerificationAttestorsPieChart';
 
 const VerificationDashboard = () => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
@@ -102,20 +103,38 @@ const VerificationDashboard = () => {
 					</Col>
 				)}
 			</RowStyled>
-			<Col md={2}></Col>
-			{loading ? (
-				<Spinner />
-			) : (
-				<VerificationChart
-					vouchCountsPerMonth={vouchCountInfo?.totalPerMonth!}
-					showWithComments={showComment}
-				/>
-			)}
-			{loading ? (
-				<Spinner />
-			) : (
-				<VerificationCommentsPieChart vouchCounts={vouchCountInfo} />
-			)}
+			<RowStyled>
+				<Col>
+					{loading ? (
+						<Spinner />
+					) : (
+						<VerificationChart
+							vouchCountsPerMonth={vouchCountInfo?.totalPerMonth!}
+							showWithComments={showComment}
+						/>
+					)}
+				</Col>
+			</RowStyled>
+			<RowStyled>
+				<Col md={6}>
+					{loading ? (
+						<Spinner />
+					) : (
+						<VerificationCommentsPieChart
+							vouchCounts={vouchCountInfo}
+						/>
+					)}
+				</Col>
+				<Col md={6}>
+					{loading ? (
+						<Spinner />
+					) : (
+						<VerificationAttestorsPieChart
+							vouchCounts={vouchCountInfo}
+						/>
+					)}
+				</Col>
+			</RowStyled>
 		</>
 	);
 };
