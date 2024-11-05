@@ -48,7 +48,7 @@ const VerificationAttestorsPieChart: FC<IProps> = ({ fromDate, toDate }) => {
 		},
 		tooltip: {
 			enabled: true,
-			pointFormat: '<b>{point.name}</b>: {point.y}',
+			pointFormat: '<b>Total Vouches</b>: {point.y}',
 		},
 		series: [
 			{
@@ -73,11 +73,11 @@ const VerificationAttestorsPieChart: FC<IProps> = ({ fromDate, toDate }) => {
 	) : (
 		<Container>
 			<FlexCenter gap='10px'>
-				<H5>Distribution of Vouches by Attestors</H5>
+				<H5>Distribution of Vouches by Attestors to GIVETH</H5>
 				<IconWithTooltip icon={<IconHelpFilled16 />} direction={'top'}>
 					<TooltipBody>
 						This chart displays the count of vouches made by
-						attestors during the selected timeframe.
+						attestors to GIVETH during the selected timeframe.
 					</TooltipBody>
 				</IconWithTooltip>
 			</FlexCenter>
