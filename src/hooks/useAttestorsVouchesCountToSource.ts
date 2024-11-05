@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { formatDateToISO, showToastError } from '../lib/helpers';
 import { deVouchGQLRequest } from '../lib/requests';
-import { IFetchVouchesCountRes, IVouchCountInfo } from '../types/gql';
+import {
+	IAttestorVouchesCountToSource,
+	IAttestorVouchesCountToSourceRes,
+} from '../types/gql';
 import { FETCH_USER_VOUCHES_COUNT_TO_SOURCE_BY_DATE } from '../gql/gqlVerification';
 
 export const useAttestorsVouchesCountToSource = (
@@ -11,7 +14,7 @@ export const useAttestorsVouchesCountToSource = (
 	source: string,
 ) => {
 	const [attestorsVouchesCountInfo, setAttestorsVouchesCountInfo] =
-		useState<IVouchCountInfo>();
+		useState<IAttestorVouchesCountToSource>();
 	const [loading, setLoading] = useState<boolean>(true);
 	useEffect(() => {
 		!loading && setLoading(true);
@@ -22,9 +25,9 @@ export const useAttestorsVouchesCountToSource = (
 			source,
 		};
 		deVouchGQLRequest(FETCH_USER_VOUCHES_COUNT_TO_SOURCE_BY_DATE, variables)
-			.then((res: IFetchVouchesCountRes) => {
+			.then((res: IAttestorVouchesCountToSourceRes) => {
 				setAttestorsVouchesCountInfo(
-					res.data.getOrganisationVouchCountByDate,
+					res.data.getOrganisationUserVouchCountBySource,
 				);
 			})
 			.catch(showToastError)
