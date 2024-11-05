@@ -32,9 +32,10 @@ const VerificationAttestorsPieChart: FC<IProps> = ({ fromDate, toDate }) => {
 		);
 
 	const data = attestorsVouchesCountInfo?.vouchCountByUser?.map(
-		({ attestorId, totalCount }) => ({
+		({ attestorId, totalCount, countWithComments }) => ({
 			name: attestorId,
 			y: totalCount,
+			countWithComments,
 		}),
 	);
 
@@ -48,7 +49,16 @@ const VerificationAttestorsPieChart: FC<IProps> = ({ fromDate, toDate }) => {
 		},
 		tooltip: {
 			enabled: true,
-			pointFormat: '<b>Total Vouches</b>: {point.y}',
+			formatter: function (this: any): string {
+				const percentageWithComments =
+					(this.point.countWithComments / this.point.y) * 100;
+				return `
+					Total Vouches: ${this.point.y}<br>
+					Vouches with Comments: ${
+						this.point.countWithComments
+					} (${percentageWithComments.toFixed(1)}%)
+				`;
+			},
 		},
 		series: [
 			{
