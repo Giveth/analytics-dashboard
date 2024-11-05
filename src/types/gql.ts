@@ -98,3 +98,40 @@ export interface IFetchRecurringDonationsTotalUSD {
 		recurringDonationsTotalStreamedUsdPerDate: IResFormatPerToken;
 	};
 }
+
+export interface IVouchCountPerMonth {
+	countWithComments: number;
+	countWithoutComments: number;
+	totalCount: number;
+	date: string;
+}
+
+export interface IVouchCountInfo {
+	total: number;
+	totalWithComments: number;
+	totalPerMonth: IVouchCountPerMonth[];
+}
+
+export interface IFetchVouchesCountRes {
+	data: {
+		getOrganisationVouchCountByDate: IVouchCountInfo;
+	};
+}
+
+export interface IVouchCountByUser {
+	totalCount: number;
+	countWithComments: number;
+	attestorId: string;
+}
+
+export interface IAttestorVouchesCountToSource {
+	vouchCountByUser: IVouchCountByUser[];
+	totalVouches: number;
+	totalWithComments: number;
+}
+
+export interface IAttestorVouchesCountToSourceRes {
+	data: {
+		getOrganisationUserVouchCountBySource: IAttestorVouchesCountToSource;
+	};
+}

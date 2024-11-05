@@ -52,7 +52,7 @@ const ProjectsCount = () => {
 		<RowStyled>
 			<Col md={4}>
 				<FlexCenter gap='10px'>
-					<H4>Projects Count </H4>
+					<H4>Active Projects Count</H4>
 					<IconWithTooltip
 						icon={<IconHelpFilled16 />}
 						direction={'top'}

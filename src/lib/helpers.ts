@@ -40,3 +40,10 @@ export const showToastError = (err: any) => {
 	});
 	console.log({ err });
 };
+
+export const formatAmount = (number: number) => {
+	if (typeof number !== 'number') {
+		return '---';
+	}
+	return number.toLocaleString('en-US');
+};
