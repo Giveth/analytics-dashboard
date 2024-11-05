@@ -126,13 +126,10 @@ const VerificationDashboard = () => {
 					)}
 				</Col>
 				<Col md={6}>
-					{loading ? (
-						<Spinner />
-					) : (
-						<VerificationAttestorsPieChart
-							vouchCounts={vouchCountInfo}
-						/>
-					)}
+					<VerificationAttestorsPieChart
+						fromDate={fromDate}
+						toDate={toDate}
+					/>
 				</Col>
 			</RowStyled>
 		</>

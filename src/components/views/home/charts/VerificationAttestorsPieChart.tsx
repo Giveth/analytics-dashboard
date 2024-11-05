@@ -10,28 +10,33 @@ import {
 } from '@giveth/ui-design-system';
 import { IconWithTooltip } from '../../../IconWithTooltip';
 import { FlexCenter } from '../../../styled-components/flex';
-import { IVouchCountInfo } from '../../../../types/gql';
+import { useAttestorsVouchesCountToSource } from '../../../../hooks/useAttestorsVouchesCountToSource';
+import {
+	GIVETH_SOURCE,
+	GIVETH_VERIFIERS_ORG_ID,
+} from '../../../../lib/constants';
+import Spinner from '../../../Spinner';
 
 interface IProps {
-	vouchCounts?: IVouchCountInfo;
+	fromDate: Date;
+	toDate: Date;
 }
 
-const VerificationAttestorsPieChart: FC<IProps> = ({ vouchCounts }) => {
-	const totalWithComments = vouchCounts?.totalWithComments || 0;
-	const totalWithoutComments = (vouchCounts?.total || 0) - totalWithComments;
+const VerificationAttestorsPieChart: FC<IProps> = ({ fromDate, toDate }) => {
+	const { attestorsVouchesCountInfo, loading } =
+		useAttestorsVouchesCountToSource(
+			fromDate,
+			toDate,
+			GIVETH_VERIFIERS_ORG_ID,
+			GIVETH_SOURCE,
+		);
 
-	const data = [
-		{
-			name: `With comments`,
-			y: totalWithComments,
-			color: '#90ed7d',
-		},
-		{
-			name: `Without comments`,
-			y: totalWithoutComments,
-			color: '#7cb5ec',
-		},
-	];
+	const data = attestorsVouchesCountInfo?.vouchCountByUser?.map(
+		({ attestorId, totalCount }) => ({
+			name: attestorId,
+			y: totalCount,
+		}),
+	);
 
 	const options = {
 		chart: {
@@ -63,7 +68,9 @@ const VerificationAttestorsPieChart: FC<IProps> = ({ vouchCounts }) => {
 		},
 	};
 
-	return (
+	return loading ? (
+		<Spinner />
+	) : (
 		<Container>
 			<FlexCenter gap='10px'>
 				<H5>Distribution of Vouches by Attestors</H5>
