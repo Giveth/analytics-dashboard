@@ -16,7 +16,7 @@ interface IProps {
 	vouchCounts?: IVouchCountInfo;
 }
 
-const VerificationPieChart: FC<IProps> = ({ vouchCounts }) => {
+const VerificationCommentsPieChart: FC<IProps> = ({ vouchCounts }) => {
 	const totalWithComments = vouchCounts?.totalWithComments || 0;
 	const totalWithoutComments = (vouchCounts?.total || 0) - totalWithComments;
 
@@ -89,4 +89,4 @@ const Container = styled.div`
 	text-align: center;
 `;
 
-export default VerificationPieChart;
+export default VerificationCommentsPieChart;
