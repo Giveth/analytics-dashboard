@@ -4,13 +4,13 @@ import { deVouchGQLRequest } from '../lib/requests';
 import { IFetchVouchesCountRes, IVouchCountInfo } from '../types/gql';
 import { FETCH_USER_VOUCHES_COUNT_TO_SOURCE_BY_DATE } from '../gql/gqlVerification';
 
-export const useUsersVouchesCountToSource = (
+export const useAttestorsVouchesCountToSource = (
 	fromDate: Date,
 	toDate: Date,
 	organizationId: string,
 	source: string,
 ) => {
-	const [usersVouchesCountInfo, setUsersVouchesCountInfo] =
+	const [attestorsVouchesCountInfo, setAttestorsVouchesCountInfo] =
 		useState<IVouchCountInfo>();
 	const [loading, setLoading] = useState<boolean>(true);
 	useEffect(() => {
@@ -23,7 +23,7 @@ export const useUsersVouchesCountToSource = (
 		};
 		deVouchGQLRequest(FETCH_USER_VOUCHES_COUNT_TO_SOURCE_BY_DATE, variables)
 			.then((res: IFetchVouchesCountRes) => {
-				setUsersVouchesCountInfo(
+				setAttestorsVouchesCountInfo(
 					res.data.getOrganisationVouchCountByDate,
 				);
 			})
@@ -31,5 +31,5 @@ export const useUsersVouchesCountToSource = (
 			.finally(() => setLoading(false));
 	}, [fromDate, toDate, organizationId, source]);
 
-	return { usersVouchesCountInfo, loading };
+	return { attestorsVouchesCountInfo, loading };
 };
