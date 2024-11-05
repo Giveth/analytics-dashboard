@@ -37,3 +37,5 @@ export const NETWORK_IDS = {
 
 export const GIVETH_VERIFIERS_ORG_ID =
 	'0xf63f2a7159ee674aa6fce42196a8bb0605eafcf20c19e91a7eafba8d39fa0404';
+
+export const GIVETH_SOURCE = 'giveth';
