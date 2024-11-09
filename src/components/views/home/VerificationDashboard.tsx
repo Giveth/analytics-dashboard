@@ -22,7 +22,6 @@ import { useVouchesCount } from '../../../hooks/useVouchesCount';
 import { GIVETH_SOURCE, GIVETH_VERIFIERS_ORG_ID } from '../../../lib/constants';
 import Spinner from '../../Spinner';
 import VerificationChart from './charts/VerificationChart';
-import VerificationCommentsPieChart from './charts/VerificationCommentsPieChart';
 import VerificationAttestorsPieChart from './charts/VerificationAttestorsPieChart';
 
 const VerificationDashboard = () => {
@@ -116,7 +115,7 @@ const VerificationDashboard = () => {
 					)}
 				</Col>
 			</RowStyled>
-			<RowStyled>
+			{/* <RowStyled>
 				<Col>
 					{loading ? (
 						<Spinner />
@@ -126,7 +125,7 @@ const VerificationDashboard = () => {
 						/>
 					)}
 				</Col>
-			</RowStyled>
+			</RowStyled> */}
 			<RowStyled>
 				<Col>
 					<VerificationAttestorsPieChart
