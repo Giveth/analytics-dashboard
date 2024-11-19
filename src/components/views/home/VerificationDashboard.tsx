@@ -19,10 +19,9 @@ import { Flex, FlexCenter } from '../../styled-components/flex';
 import DatePicker from '../../DatePicker';
 import CheckBox from '../../CheckBox';
 import { useVouchesCount } from '../../../hooks/useVouchesCount';
-import { GIVETH_VERIFIERS_ORG_ID } from '../../../lib/constants';
+import { GIVETH_SOURCE, GIVETH_VERIFIERS_ORG_ID } from '../../../lib/constants';
 import Spinner from '../../Spinner';
 import VerificationChart from './charts/VerificationChart';
-import VerificationCommentsPieChart from './charts/VerificationCommentsPieChart';
 import VerificationAttestorsPieChart from './charts/VerificationAttestorsPieChart';
 
 const VerificationDashboard = () => {
@@ -34,6 +33,7 @@ const VerificationDashboard = () => {
 		fromDate,
 		toDate,
 		GIVETH_VERIFIERS_ORG_ID,
+		GIVETH_SOURCE,
 	);
 
 	return (
@@ -115,7 +115,7 @@ const VerificationDashboard = () => {
 					)}
 				</Col>
 			</RowStyled>
-			<RowStyled>
+			{/* <RowStyled>
 				<Col>
 					{loading ? (
 						<Spinner />
@@ -125,7 +125,7 @@ const VerificationDashboard = () => {
 						/>
 					)}
 				</Col>
-			</RowStyled>
+			</RowStyled> */}
 			<RowStyled>
 				<Col>
 					<VerificationAttestorsPieChart

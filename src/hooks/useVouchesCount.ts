@@ -8,6 +8,7 @@ export const useVouchesCount = (
 	fromDate: Date,
 	toDate: Date,
 	organizationId: string,
+	source: string,
 ) => {
 	const [vouchCountInfo, setVouchCountInfo] = useState<IVouchCountInfo>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -17,6 +18,7 @@ export const useVouchesCount = (
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
 			organisationId: organizationId,
+			source,
 		};
 		deVouchGQLRequest(FETCH_VOUCHES_COUNT_BY_DATE, variables)
 			.then((res: IFetchVouchesCountRes) => {
@@ -24,7 +26,7 @@ export const useVouchesCount = (
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, organizationId, toDate]);
+	}, [fromDate, organizationId, source, toDate]);
 
 	return { vouchCountInfo, loading };
 };
