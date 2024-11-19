@@ -21,7 +21,9 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-lottie": "^1.2.3",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "viem": "^2.21.48",
+    "wagmi": "^2.12.33"
   },
   "devDependencies": {
     "@types/node": "18.11.9",
