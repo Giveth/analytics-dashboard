@@ -33,6 +33,8 @@ export const NETWORK_IDS = {
 	SOLANA_MAINNET: 101,
 	SOLANA_TESTNET: 102,
 	SOLANA_DEVNET: 103,
+	STELLAR_MAINNET: 1500,
+	STELLAR_TESTNET: 1500, // We didn't use this network testnet 1501 in the project
 };
 
 export const GIVETH_VERIFIERS_ORG_ID =
