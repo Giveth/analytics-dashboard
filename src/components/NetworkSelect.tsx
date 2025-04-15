@@ -39,10 +39,6 @@ function getCorrectNetworkIdBasedOnEnv(networkId: number) {
 			return isDevelopment
 				? NETWORK_IDS.MORDOR_ETC_TESTNET
 				: NETWORK_IDS.ETC;
-		case NETWORK_IDS.STELLAR_MAINNET:
-			return isDevelopment
-				? NETWORK_IDS.STELLAR_TESTNET
-				: NETWORK_IDS.STELLAR_MAINNET;
 		default:
 			return networkId;
 	}
@@ -114,13 +110,6 @@ const NetworkSelect: React.FC<NetworkSelectProps> = ({
 				</option>
 				<option value={getCorrectNetworkIdBasedOnEnv(NETWORK_IDS.CELO)}>
 					Celo
-				</option>
-				<option
-					value={getCorrectNetworkIdBasedOnEnv(
-						NETWORK_IDS.STELLAR_MAINNET,
-					)}
-				>
-					Stellar
 				</option>
 			</SelectStyled>
 		</>
