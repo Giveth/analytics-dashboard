@@ -40,6 +40,7 @@ function getCorrectNetworkIdBasedOnEnv(networkId: number) {
 				? NETWORK_IDS.MORDOR_ETC_TESTNET
 				: NETWORK_IDS.ETC;
 		case NETWORK_IDS.STELLAR_MAINNET:
+			// We are not using the stellar test network in the project, use same network ID for dev and prod
 			return isDevelopment
 				? NETWORK_IDS.STELLAR_TESTNET
 				: NETWORK_IDS.STELLAR_MAINNET;
