@@ -17,7 +17,7 @@ The Giveth Analytics Dashboard is a web application that provides data visualiza
 
 ### Live Links
 
--   Development: http://localhost:3000
+-   Development: [https://staging.stats.giveth.io/](https://staging.stats.giveth.io/)
 -   Production: [https://stats.giveth.io/](https://stats.giveth.io/)
 
 ## 2. Architecture Overview
