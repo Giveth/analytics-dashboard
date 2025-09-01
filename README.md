@@ -100,12 +100,6 @@ yarn build
 yarn start
 ```
 
-### Testing
-
-```bash
-# Add testing commands once implemented
-```
-
 ### Common Tasks
 
 -   **Code Linting**: `yarn lint`
