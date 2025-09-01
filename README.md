@@ -156,7 +156,6 @@ yarn start
 -   Check Next.js build output for deployment issues
 -   Enable React Developer Tools for component debugging
 
-
 ## License
 
 UNLICENSED
