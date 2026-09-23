@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { backendGQLRequest } from '../lib/requests';
+import { BackendVersion, statsGQLRequest } from '../lib/requests';
 import { IFetchNewDonorsCount } from '../types/gql';
 import { formatDateToISO, showToastError } from '../lib/helpers';
 import { fetchNewDonorsCount } from '../gql/gqlDonors';
 
-const useNewDonorsCount = (fromDate: Date, toDate: Date) => {
+const useNewDonorsCount = (
+	version: BackendVersion,
+	fromDate: Date,
+	toDate: Date,
+) => {
 	const [newDonorsCount, setNewDonorsCount] = useState<number>();
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -14,13 +18,13 @@ const useNewDonorsCount = (fromDate: Date, toDate: Date) => {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
 		};
-		backendGQLRequest(fetchNewDonorsCount, variables)
+		statsGQLRequest(version, fetchNewDonorsCount, variables)
 			.then((res: IFetchNewDonorsCount) => {
 				setNewDonorsCount(res.data.newDonorsCountPerDate.total);
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate]);
+	}, [fromDate, toDate, version]);
 
 	return { newDonorsCount, loading };
 };

@@ -22,8 +22,9 @@ import ProjectsChart from './charts/ProjectsChart';
 import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
 import NetworkSelect from '../../NetworkSelect';
+import type { BackendVersion } from '../../../lib/requests';
 
-const ProjectsCount = () => {
+const ProjectsCount = ({ version = 'v5' }: { version?: BackendVersion }) => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
@@ -31,6 +32,7 @@ const ProjectsCount = () => {
 	const [onlyListed, setOnlyListed] = useState(false);
 
 	const { projectsCount, loading } = useProjectsCount(
+		version,
 		fromDate,
 		toDate,
 		selectedNetworkId,

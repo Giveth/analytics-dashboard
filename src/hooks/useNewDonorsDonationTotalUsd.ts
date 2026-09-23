@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { backendGQLRequest } from '../lib/requests';
+import { BackendVersion, statsGQLRequest } from '../lib/requests';
 import { IFetchNewDonorsDonationTotalUsd } from '../types/gql';
 import { formatDateToISO, showToastError } from '../lib/helpers';
 import { fetchNewDonorsDonationTotalUsd } from '../gql/gqlDonors';
 
-const useNewDonorsDonationTotalUsd = (fromDate: Date, toDate: Date) => {
+const useNewDonorsDonationTotalUsd = (
+	version: BackendVersion,
+	fromDate: Date,
+	toDate: Date,
+) => {
 	const [newDonorsDonationTotalUsd, setNewDonorsDonationTotalUsd] =
 		useState<number>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -15,7 +19,7 @@ const useNewDonorsDonationTotalUsd = (fromDate: Date, toDate: Date) => {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
 		};
-		backendGQLRequest(fetchNewDonorsDonationTotalUsd, variables)
+		statsGQLRequest(version, fetchNewDonorsDonationTotalUsd, variables)
 			.then((res: IFetchNewDonorsDonationTotalUsd) => {
 				setNewDonorsDonationTotalUsd(
 					res.data.newDonorsDonationTotalUsdPerDate.total,
@@ -23,7 +27,7 @@ const useNewDonorsDonationTotalUsd = (fromDate: Date, toDate: Date) => {
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate]);
+	}, [fromDate, toDate, version]);
 
 	return { newDonorsDonationTotalUsd, loading };
 };

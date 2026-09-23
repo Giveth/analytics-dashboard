@@ -15,12 +15,18 @@ import DatePicker from '../../DatePicker';
 import NetworkSelect from '../../NetworkSelect';
 import useDonationTokenStats from '../../../hooks/useDonationTokenStats';
 import DonationTokenStatsChart from './charts/DonationTokenStatsChart';
+import type { BackendVersion } from '../../../lib/requests';
 
-const DonationTokenStats = () => {
+const DonationTokenStats = ({
+	version = 'v5',
+}: {
+	version?: BackendVersion;
+}) => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const { tokenStats, loading } = useDonationTokenStats(
+		version,
 		fromDate,
 		toDate,
 		selectedNetworkId,

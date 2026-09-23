@@ -24,14 +24,16 @@ import TotalDonationsChart from './charts/TotalDonationsChart';
 import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
 import NetworkSelect from '../../NetworkSelect';
+import type { BackendVersion } from '../../../lib/requests';
 
-const TotalDonations = () => {
+const TotalDonations = ({ version = 'v5' }: { version?: BackendVersion }) => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const [onlyVerified, setOnlyVerified] = useState(false);
 	const [onlyEndaoment, setOnlyEndaoment] = useState<boolean>(false);
 	const { totalDonations, loading: loadingTotal } = useTotalDonations(
+		version,
 		fromDate,
 		toDate,
 		selectedNetworkId,
@@ -40,6 +42,7 @@ const TotalDonations = () => {
 	);
 	const { categoryDonations, loading: loadingCategories } =
 		useCategoryDonations(
+			version,
 			fromDate,
 			toDate,
 			selectedNetworkId,

@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { backendGQLRequest } from '../lib/requests';
+import { BackendVersion, statsGQLRequest } from '../lib/requests';
 import { IDonationBoxMetrics } from '../types/gql';
 import { formatDateToISO, showToastError } from '../lib/helpers';
 import { fetchDonationBoxMetrics } from '../gql/gqlDonations';
 
-const useDonationBoxMetrics = (fromDate: Date, toDate: Date) => {
+const useDonationBoxMetrics = (
+	version: BackendVersion,
+	fromDate: Date,
+	toDate: Date,
+) => {
 	const [donationMetrics, setDonationMetrics] =
 		useState<IDonationBoxMetrics | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -15,7 +19,7 @@ const useDonationBoxMetrics = (fromDate: Date, toDate: Date) => {
 			fromDate: formatDateToISO(fromDate),
 			toDate: formatDateToISO(toDate),
 		};
-		backendGQLRequest(fetchDonationBoxMetrics, variables)
+		statsGQLRequest(version, fetchDonationBoxMetrics, variables)
 			.then(res => {
 				if (res.errors) {
 					throw new Error(res.errors[0].message);
@@ -24,7 +28,7 @@ const useDonationBoxMetrics = (fromDate: Date, toDate: Date) => {
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate]);
+	}, [fromDate, toDate, version]);
 
 	return { donationMetrics, loading };
 };

@@ -15,6 +15,7 @@ import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import DatePicker from '../../DatePicker';
 import { firstOfNextMonth, firstOfThisMonth } from '../../../lib/helpers';
+import type { BackendVersion } from '../../../lib/requests';
 
 const formatNumber = (number?: number) => {
 	return parseFloat(String(number || 0)).toLocaleString('en-US', {
@@ -22,11 +23,16 @@ const formatNumber = (number?: number) => {
 	});
 };
 
-const DonationBoxMetrics = () => {
+const DonationBoxMetrics = ({
+	version = 'v5',
+}: {
+	version?: BackendVersion;
+}) => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 
 	const { donationMetrics, loading } = useDonationBoxMetrics(
+		version,
 		fromDate,
 		toDate,
 	);

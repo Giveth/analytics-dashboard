@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { backendGQLRequest } from '../lib/requests';
+import { BackendVersion, statsGQLRequest } from '../lib/requests';
 import { IFetchDonationsCount, IResFormat } from '../types/gql';
 import { formatDateToISO, showToastError } from '../lib/helpers';
 import { fetchDonationsCount } from '../gql/gqlDonations';
 
 const useDonationsCount = (
+	version: BackendVersion,
 	fromDate: Date,
 	toDate: Date,
 	selectedNetworkId?: number,
@@ -23,13 +24,20 @@ const useDonationsCount = (
 			onlyVerified,
 			onlyEndaoment,
 		};
-		backendGQLRequest(fetchDonationsCount, variables)
+		statsGQLRequest(version, fetchDonationsCount, variables)
 			.then((res: IFetchDonationsCount) => {
 				setDonationsCount(res.data.totalDonationsNumberPerDate);
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, selectedNetworkId, onlyVerified, onlyEndaoment]);
+	}, [
+		fromDate,
+		toDate,
+		selectedNetworkId,
+		onlyVerified,
+		onlyEndaoment,
+		version,
+	]);
 
 	return { donationsCount, loading };
 };
