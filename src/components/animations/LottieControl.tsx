@@ -1,5 +1,11 @@
 import React from 'react';
-import Lottie from 'react-lottie';
+import dynamic from 'next/dynamic';
+
+// Browser-only: lottie-web touches `document` the moment it is imported. It
+// decides it is in a browser by checking for `navigator`, which Node 21+
+// defines globally, so importing it during server rendering crashes the page
+// with "document is not defined".
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
 type MyProps = { size: any; animationData: any };
 type MyState = { isStopped: boolean; isPaused: boolean };
