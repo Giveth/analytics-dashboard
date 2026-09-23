@@ -19,11 +19,17 @@ import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import useNewDonorsDonationTotalUsd from '../../../hooks/useNewDonorsDonationTotalUsd';
 import DatePicker from '../../DatePicker';
+import type { BackendVersion } from '../../../lib/requests';
 
-const NewDonorsDonationTotalUsd = () => {
+const NewDonorsDonationTotalUsd = ({
+	version = 'v5',
+}: {
+	version?: BackendVersion;
+}) => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const { newDonorsDonationTotalUsd, loading } = useNewDonorsDonationTotalUsd(
+		version,
 		fromDate,
 		toDate,
 	);
