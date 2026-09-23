@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { backendGQLRequest } from '../lib/requests';
+import { BackendVersion, statsGQLRequest } from '../lib/requests';
 import { fetchProjectsCount } from '../gql/gqlProjects';
 import { IFetchProjectsCount, IResFormat } from '../types/gql';
 import { formatDateToISO, showToastError } from '../lib/helpers';
 
 const useProjectsCount = (
+	version: BackendVersion,
 	fromDate: Date,
 	toDate: Date,
 	selectedNetworkId?: number,
@@ -23,13 +24,20 @@ const useProjectsCount = (
 			onlyVerified: onlyVerified || false,
 			onlyListed: onlyListed || false,
 		};
-		backendGQLRequest(fetchProjectsCount, variables)
+		statsGQLRequest(version, fetchProjectsCount, variables)
 			.then((res: IFetchProjectsCount) => {
 				setProjectsCount(res.data.projectsPerDate);
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, selectedNetworkId, onlyListed, onlyVerified]);
+	}, [
+		fromDate,
+		toDate,
+		selectedNetworkId,
+		onlyListed,
+		onlyVerified,
+		version,
+	]);
 
 	return { projectsCount, loading };
 };
