@@ -19,11 +19,16 @@ import { IconWithTooltip } from '../../IconWithTooltip';
 import { FlexCenter } from '../../styled-components/flex';
 import useNewDonorsCount from '../../../hooks/useNewDonorsCount';
 import DatePicker from '../../DatePicker';
+import type { BackendVersion } from '../../../lib/requests';
 
-const DonorsCount = () => {
+const DonorsCount = ({ version = 'v5' }: { version?: BackendVersion }) => {
 	const [fromDate, setFromDate] = useState(firstOfThisMonth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
-	const { newDonorsCount, loading } = useNewDonorsCount(fromDate, toDate);
+	const { newDonorsCount, loading } = useNewDonorsCount(
+		version,
+		fromDate,
+		toDate,
+	);
 	return (
 		<RowStyled>
 			<Col md={4}>
