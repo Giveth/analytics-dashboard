@@ -22,14 +22,16 @@ import DonationsChart from './charts/DonationsChart';
 import CheckBox from '../../CheckBox';
 import DatePicker from '../../DatePicker';
 import NetworkSelect from '../../NetworkSelect';
+import type { BackendVersion } from '../../../lib/requests';
 
-const DonationsCount = () => {
+const DonationsCount = ({ version = 'v5' }: { version?: BackendVersion }) => {
 	const [fromDate, setFromDate] = useState(firstOfGiveth());
 	const [toDate, setToDate] = useState(firstOfNextMonth());
 	const [selectedNetworkId, setSelectedNetworkId] = useState<number>();
 	const [onlyVerified, setOnlyVerified] = useState(false);
 	const [onlyEndaoment, setOnlyEndaoment] = useState<boolean>(false);
 	const { donationsCount, loading } = useDonationsCount(
+		version,
 		fromDate,
 		toDate,
 		selectedNetworkId,
