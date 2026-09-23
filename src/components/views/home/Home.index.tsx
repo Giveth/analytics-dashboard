@@ -3,25 +3,28 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import Tabs from './Tabs';
 import TabContent from './TabContent';
+import { TABS, Tab } from './tabNames';
 
 const HomeIndex = () => {
-	const [activeTab, setActiveTab] = useState<string>('Donations');
+	const [activeTab, setActiveTab] = useState<Tab>(TABS.V5_DONATIONS);
 
 	return (
-		<ContainerStyled>
+		<>
 			<Tabs setActiveTab={setActiveTab} activeTab={activeTab} />
-			<H1 weight={700}>Giveth Analytics Dashboard</H1>
-			<Content>
-				<TabContent activeTab={activeTab} />
-			</Content>
-		</ContainerStyled>
+			<ContainerStyled>
+				<H1 weight={700}>Giveth Analytics Dashboard</H1>
+				<Content>
+					<TabContent activeTab={activeTab} />
+				</Content>
+			</ContainerStyled>
+		</>
 	);
 };
 
 const ContainerStyled = styled(Container)`
-	margin-top: 80px;
+	margin-top: 40px;
 	margin-bottom: 120px;
-	> h1:nth-child(2) {
+	> h1 {
 		text-align: center;
 	}
 `;
