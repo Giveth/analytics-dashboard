@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { backendGQLRequest } from '../lib/requests';
+import { BackendVersion, statsGQLRequest } from '../lib/requests';
 import { fetchTotalDonationsPerCategory } from '../gql/gqlDonations';
 import {
 	IFetchTotalDonationsPerCategory,
@@ -8,6 +8,7 @@ import {
 import { formatDateToISO, showToastError } from '../lib/helpers';
 
 const useCategoryDonations = (
+	version: BackendVersion,
 	fromDate: Date,
 	toDate: Date,
 	selectedNetworkId?: number,
@@ -27,14 +28,21 @@ const useCategoryDonations = (
 			onlyVerified,
 			onlyEndaoment,
 		};
-		backendGQLRequest(fetchTotalDonationsPerCategory, variables)
+		statsGQLRequest(version, fetchTotalDonationsPerCategory, variables)
 			.then((res: IFetchTotalDonationsPerCategory) => {
 				const total = res.data.totalDonationsPerCategory;
 				setCategoryDonations(total);
 			})
 			.catch(showToastError)
 			.finally(() => setLoading(false));
-	}, [fromDate, toDate, selectedNetworkId, onlyVerified, onlyEndaoment]);
+	}, [
+		fromDate,
+		toDate,
+		selectedNetworkId,
+		onlyVerified,
+		onlyEndaoment,
+		version,
+	]);
 
 	return { categoryDonations, loading };
 };
